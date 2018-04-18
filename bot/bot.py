@@ -42,6 +42,11 @@ def rules(bot, update):
     update.message.reply_text(rules)
 
 
+def xinga(bot, update):
+    """(Will) Send the Guilherme picture."""
+    update.message.reply_text("Guilherme aqui!")
+
+
 def error(bot, update, error):
     """Log Errors caused by Updates."""
     logger.warning('Update "%s" caused error "%s"', update, error)
@@ -56,6 +61,7 @@ def run_bot():
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("help", help))
     dp.add_handler(CommandHandler("rules", rules))
+    dp.add_handler(CommandHandler("xinga", xinga))
 
     dp.add_handler(MessageHandler(Filters.text, echo))
 
