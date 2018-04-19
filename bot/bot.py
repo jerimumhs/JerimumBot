@@ -30,6 +30,14 @@ def welcome(bot, update):
     update.message.reply_text(welcome)
 
 
+def bye(bot, update):
+    """Send a message when a user leaves the group."""
+    bye = (
+        "{first_name} acabou de sair do grupo, uma palminha, e uma vainha...\n\n"
+        "UUUuuuUUuUUUuUUUuu"
+    ).format(first_name=update.message.from_user.first_name)
+    update.message.reply_text(bye)
+
 def rules(bot, update):
     """Send a message with the group rules."""
     rules = (
@@ -82,6 +90,9 @@ def run_bot():
 
     dp.add_handler(MessageHandler(
         Filters.status_update.new_chat_members, welcome))
+
+    dp.add_handler(MessageHandler(
+        Filters.status_update.left_chat_member, bye))
 
     dp.add_error_handler(error)
 
