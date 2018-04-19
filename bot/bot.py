@@ -19,9 +19,15 @@ def help(bot, update):
     update.message.reply_text('Help!')
 
 
-def echo(bot, update):
-    """Echo the user message."""
-    update.message.reply_text(update.message.text)
+def welcome(bot, update):
+    """Send a message when a new user join the group."""
+    welcome = (
+        "Olá {first_name}, seja bem-vindo ao Jerimum Hackerspace"
+        "Somos um grupo de pessoas interessadas em usar, remixar e compartilhar "
+        "tecnologia, aprendizado, diversão e cultura de forma colaborativa e indiscriminada."
+        "Leia nossas /regras e agora porque você não fala um pouco sobre você?"
+    ).format(first_name=update.message.from_user.first_name)
+    update.message.reply_text(welcome)
 
 
 def rules(bot, update):
@@ -74,7 +80,8 @@ def run_bot():
     dp.add_handler(CommandHandler("rules", rules))
     dp.add_handler(CommandHandler("xinga", xinga))
 
-    dp.add_handler(MessageHandler(Filters.text, echo))
+    dp.add_handler(MessageHandler(
+        Filters.status_update.new_chat_members, welcome))
 
     dp.add_error_handler(error)
 
