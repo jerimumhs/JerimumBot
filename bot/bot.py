@@ -26,7 +26,7 @@ def welcome(bot, update):
         "Somos um grupo de pessoas interessadas em usar, remixar e compartilhar "
         "tecnologia, aprendizado, diversão e cultura de forma colaborativa e indiscriminada."
         "Leia nossas /regras e agora porque você não fala um pouco sobre você?"
-    ).format(first_name=update.message.from_user.first_name)
+    ).format(first_name=update.message.new_chat_members[0].full_name)
     update.message.reply_text(welcome)
 
 
@@ -35,7 +35,7 @@ def bye(bot, update):
     bye = (
         "{first_name} acabou de sair do grupo, uma palminha, e uma vainha...\n\n"
         "UUUuuuUUuUUUuUUUuu"
-    ).format(first_name=update.message.from_user.first_name)
+    ).format(first_name=update.message.left_chat_member.full_name)
     update.message.reply_text(bye)
 
 def rules(bot, update):
