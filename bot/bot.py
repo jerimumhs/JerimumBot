@@ -43,8 +43,10 @@ def rules(bot, update):
 
 
 def xinga(bot, update):
-    """(Will) Send the Guilherme picture."""
-    update.message.reply_text("Guilherme aqui!")
+    """Send the Guilherme picture."""
+    bot.send_photo(chat_id=update.message.chat_id,
+                   photo=open('bot/imgs/guilherme.jpg', 'rb'),
+                   caption="Guilherme presente!")
 
 
 def error(bot, update, error):
