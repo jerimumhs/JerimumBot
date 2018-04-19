@@ -11,20 +11,24 @@ logger = logging.getLogger(__name__)
 
 def start(bot, update):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('Hi!')
+    update.message.reply_text('Para começar, basta digitar!')
 
 
 def help(bot, update):
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Help!')
+    help = (
+        "Está com duvidas? Fale com nossos membros!\n"
+        "Em caso de duvidas mais especificas procure nossos Administradores."
+    )
+    update.message.reply_text(help)
 
 
 def welcome(bot, update):
     """Send a message when a new user join the group."""
     welcome = (
-        "Olá {first_name}, seja bem-vindo ao Jerimum Hackerspace"
+        "Olá {first_name}, seja bem-vindo ao Jerimum Hackerspace\n\n"
         "Somos um grupo de pessoas interessadas em usar, remixar e compartilhar "
-        "tecnologia, aprendizado, diversão e cultura de forma colaborativa e indiscriminada."
+        "tecnologia, aprendizado, diversão e cultura de forma colaborativa e indiscriminada.\n\n"
         "Leia nossas /regras e agora porque você não fala um pouco sobre você?"
     ).format(first_name=update.message.new_chat_members[0].full_name)
     update.message.reply_text(welcome)
@@ -84,8 +88,8 @@ def run_bot():
     dp = updater.dispatcher
 
     dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("help", help))
-    dp.add_handler(CommandHandler("rules", rules))
+    dp.add_handler(CommandHandler("ajuda", help))
+    dp.add_handler(CommandHandler("regras", rules))
     dp.add_handler(CommandHandler("xinga", xinga))
 
     dp.add_handler(MessageHandler(
