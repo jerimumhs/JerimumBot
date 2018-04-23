@@ -45,19 +45,29 @@ def bye(bot, update):
 def rules(bot, update):
     """Send a message with the group rules."""
     rules = (
-        "1. Não haver discriminação em nenhum sentido, raça, religião, sexo ou linguagem de programação.\n"
-        "2. Esse não é um grupo para discussões de política ou religião, existe lugares para isso, mas não é aqui.\n"
-        "3. Evite mensagens religiosas, não somos contra religião, só que esse grupo tem foco claro. \n"
-        "4. Evite postagens de cunho comercial, venda de produtos e serviços, e outros tipos de ações "
-        "correlacionadas. Não é proibido, mas peça permissão aos administradores antes.\n"
-        "5. Não compartilhar conteúdo sem autorização ou que a licença permita. \n"
-        "6. Proibido envio de vídeos ou imagens pornográficas, acidentes, informações que não sejam de carácter tecnológico. \n"
+        "1. Não haver discriminação em nenhum sentido, raça, religião, "
+        "sexo ou linguagem de programação.\n"
+        "2. Esse não é um grupo para discussões de política ou religião, "
+        "existe lugares para isso, mas não é aqui.\n"
+        "3. Evite mensagens religiosas, não somos contra religião, só "
+        "que esse grupo tem foco claro. \n"
+        "4. Evite postagens de cunho comercial, venda de produtos e "
+        "serviços, e outros tipos de ações correlacionadas. Não é "
+        "proibido, mas peça permissão aos administradores antes.\n"
+        "5. Não compartilhar conteúdo sem autorização ou que a licença"
+        " permita. \n"
+        "6. Proibido envio de vídeos ou imagens pornográficas, acidentes, "
+        "informações que não sejam de carácter tecnológico. \n"
         "7. Não ficar fazendo flood conversando com o Guilherme_Bot.\n"
-        "8. Encontrou alguma mensagens em desacordo com nossas regras, por favor avise nossos administradores.\n"
+        "8. Encontrou alguma mensagens em desacordo com nossas regras, "
+        "por favor avise nossos administradores.\n"
         "9. Havendo qualquer restrição as regras será banido. \n\n"
-        "Att. Jerimum Hacker Bot <3
+        "Att. Jerimum Hacker Bot <3"
         )
-    update.message.reply_text(rules)
+    if update.message.chat.get_member(update.message.from_user.id).status in ('creator', 'administrator'):
+        update.message.reply_text(rules)
+    else:
+        bot.sendMessage(chat_id=update.message.from_user.id, text=rules)
 
 
 def xinga(bot, update):
@@ -69,6 +79,9 @@ def xinga(bot, update):
 
 def error(bot, update, error):
     """Log Errors caused by Updates."""
+    if error.message == "Forbidden: bot can't initiate conversation with a user":
+        update.message.reply_text(
+            "Por favor, inicie uma conversa comigo para que eu possa te enviar as regras!")
     logger.warning('Update "%s" caused error "%s"', update, error)
 
 
