@@ -70,6 +70,23 @@ def rules(bot, update):
         bot.sendMessage(chat_id=update.message.from_user.id, text=rules)
 
 
+def description(bot, update):
+    """Send a message with the group description."""
+    description = (
+        "O Jerimum Hackerspace é um local aberto e colaborativo que "
+        "fomenta a troca de conhecimento e experiências, onde as pessoas "
+        "podem se encontrar, socializar, compartilhar e colaborar. "
+        "Também onde entusiastas de tecnologia realizem projetos em "
+        "diversas áreas, como segurança, hardware, eletrônica, robótica, "
+        "espaçomodelismo, software, biologia, música, artes plásticas "
+        "ou o que mais a criatividade permitir."
+    )
+    if update.message.chat.get_member(update.message.from_user.id).status in ('creator', 'administrator'):
+        update.message.reply_text(description)
+    else:
+        bot.sendMessage(chat_id=update.message.from_user.id, text=description)
+
+
 def xinga(bot, update):
     """Send the Guilherme picture."""
     bot.send_photo(chat_id=update.message.chat_id,
@@ -95,6 +112,7 @@ def run_bot():
     dp.add_handler(CommandHandler("ajuda", help))
     dp.add_handler(CommandHandler("regras", rules))
     dp.add_handler(CommandHandler("xinga", xinga))
+    dp.add_handler(CommandHandler("description", description))
 
     dp.add_handler(MessageHandler(
         Filters.status_update.new_chat_members, welcome))
