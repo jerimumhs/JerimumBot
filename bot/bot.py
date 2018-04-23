@@ -112,7 +112,7 @@ def run_bot():
     dp.add_handler(CommandHandler("ajuda", help))
     dp.add_handler(CommandHandler("regras", rules))
     dp.add_handler(CommandHandler("xinga", xinga))
-    dp.add_handler(CommandHandler("description", description))
+    dp.add_handler(CommandHandler("/descricao", description))
 
     dp.add_handler(MessageHandler(
         Filters.status_update.new_chat_members, welcome))
