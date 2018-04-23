@@ -45,26 +45,17 @@ def bye(bot, update):
 def rules(bot, update):
     """Send a message with the group rules."""
     rules = (
-        "Regras do grupo\n"
-        "Pessoal, como em toda boa comunidade, nós precisamos de regras.\n"
-        "Tentaremos mantê-las ao mínimo para que seja possível a convivência pacífica.\n"
-        "Eventualmente, atualizaremos para uma comunidade melhor desenvolvida.\n\n"
-        "Objetivos do grupo:\n\n"
-        "1. Manuntenção de um Hackerspace em Natal/RN;\n"
-        "2. Desenvolver comunicação entre a comunidade do hackerspace.\n"
-        "3. Troca de conhecimento entre os participantes.\n\n"
-        "Regras gerais\n\n"
-        "1. Não mande correntes, não importa o conteúdo. NÃO ENVIE CORRENTES.\n"
+        "1. Não haver discriminação em nenhum sentido, raça, religião, sexo ou linguagem de programação.\n"
         "2. Esse não é um grupo para discussões de política ou religião, existe lugares para isso, mas não é aqui.\n"
         "3. Evite mensagens religiosas, não somos contra religião, só que esse grupo tem foco claro. \n"
         "4. Evite postagens de cunho comercial, venda de produtos e serviços, e outros tipos de ações "
-        "correlacionadas. Não é proibido, mas lembre-se que esse não é o objetivo do grupo.\n"
-        "5. Respeite tudo e todos, seja uma pessoa excelente. \n"
-        "6. Conforme o grupo cresce, e devido ao grande volume de trabalho fica cada vez mais difícil acompanhar "
-        "todas as mensagens, por isso se verificar algum post ou troca de mensagens em desacordo com nossas "
-        "regras, por favor avise nossos administradores.\n\n"
-        "No entanto é isso.\n"
-        "Att. Jerimum Hacker Bot <3"
+        "correlacionadas. Não é proibido, mas peça permissão aos administradores antes.\n"
+        "5. Não compartilhar conteúdo sem autorização ou que a licença permita. \n"
+        "6. Proibido envio de vídeos ou imagens pornográficas, acidentes, informações que não sejam de carácter tecnológico. \n"
+        "7. Não ficar fazendo flood conversando com o Guilherme_Bot.\n"
+        "8. Encontrou alguma mensagens em desacordo com nossas regras, por favor avise nossos administradores.\n"
+        "9. Havendo qualquer restrição as regras será banido. \n\n"
+        "Att. Jerimum Hacker Bot <3
         )
     update.message.reply_text(rules)
 
@@ -103,4 +94,3 @@ def run_bot():
     updater.start_polling()
 
     updater.idle()
-
