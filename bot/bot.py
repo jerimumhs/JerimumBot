@@ -1,4 +1,6 @@
-from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram.ext import (Updater, CommandHandler,
+                          MessageHandler, Filters, CallbackQueryHandler)
 import logging
 
 from . import config
@@ -31,8 +33,31 @@ def welcome(bot, update):
         "tecnologia, aprendizado, diversão e cultura de forma colaborativa e indiscriminada.\n\n"
         "Leia nossas /regras e agora porque você não fala um pouco sobre você?"
     ).format(first_name=update.message.new_chat_members[0].full_name)
-    update.message.reply_text(welcome)
+    
+    keyboard = [
+        [InlineKeyboardButton("Leia as regras!", callback_data='rules')]
+        ]
 
+    reply_markup = InlineKeyboardMarkup(keyboard)
+
+    update.message.reply_text(welcome, reply_markup=reply_markup)
+
+
+def button(bot, update):
+    query = update.callback_query
+    
+    if query.data == "rules":
+        bot.answer_callback_query(
+            callback_query_id=query.id,
+            text=(
+                "1 Respeite os participantes do grupo\n"
+                "2 Não compartilhar conteúdo sem autorização\n"
+                "3 Não envie SPAM\n"
+                "4 Proibido envio de material pornográfico\n"
+                "5 Havendo qualquer restrição as regras será banido"
+            ),
+            show_alert=True
+        )
 
 def bye(bot, update):
     """Send a message when a user leaves the group."""
@@ -64,10 +89,12 @@ def rules(bot, update):
         "9. Havendo qualquer restrição as regras será banido. \n\n"
         "Att. Jerimum Hacker Bot <3"
         )
-    if update.message.chat.get_member(update.message.from_user.id).status in ('creator', 'administrator'):
+    if adm_verify(update):
         update.message.reply_text(rules)
-    else:
-        bot.sendMessage(chat_id=update.message.from_user.id, text=rules)
+    else:        
+        bot.sendMessage(
+            chat_id=update.message.from_user.id, 
+            text=rules)
 
 
 def description(bot, update):
@@ -81,10 +108,12 @@ def description(bot, update):
         "espaçomodelismo, software, biologia, música, artes plásticas "
         "ou o que mais a criatividade permitir."
     )
-    if update.message.chat.get_member(update.message.from_user.id).status in ('creator', 'administrator'):
+    if adm_verify(update):
         update.message.reply_text(description)
-    else:
-        bot.sendMessage(chat_id=update.message.from_user.id, text=description)
+    else:        
+        bot.sendMessage(
+            chat_id=update.message.from_user.id, 
+            text=description)
 
 
 def xinga(bot, update):
@@ -99,7 +128,13 @@ def error(bot, update, error):
     if error.message == "Forbidden: bot can't initiate conversation with a user":
         update.message.reply_text(
             "Por favor, inicie uma conversa comigo para que eu possa te enviar as regras!")
-    logger.warning('Update "%s" caused error "%s"', update, error)
+    else:
+        logger.warning('Update "%s" caused error "%s"', update, error)
+
+def adm_verify(update):
+    if update.message.chat.get_member(update.message.from_user.id).status in ('creator', 'administrator'):
+        return True
+    return False
 
 
 def run_bot():
@@ -119,6 +154,8 @@ def run_bot():
 
     dp.add_handler(MessageHandler(
         Filters.status_update.left_chat_member, bye))
+
+    dp.add_handler(CallbackQueryHandler(button))
 
     dp.add_error_handler(error)
 
