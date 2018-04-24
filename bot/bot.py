@@ -35,7 +35,13 @@ def welcome(bot, update):
     ).format(first_name=update.message.new_chat_members[0].full_name)
     
     keyboard = [
-        [InlineKeyboardButton("Leia as regras!", callback_data='rules')]
+        [InlineKeyboardButton(
+            "Leia as regras!", 
+            callback_data='rules')],
+        [InlineKeyboardButton(
+            "Visite nosso site!", 
+            callback_data='site', 
+            url="http://www.jerimumhs.org/")]
         ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
@@ -59,6 +65,10 @@ def button(bot, update):
             ),
             show_alert=True
         )
+    elif query.data == "site":
+       bot.answer_callback_query(
+           callback_query_id=query.id
+       )
 
 def bye(bot, update):
     """Send a message when a user leaves the group."""
@@ -128,7 +138,7 @@ def error(bot, update, error):
     """Log Errors caused by Updates."""
     if error.message == "Forbidden: bot can't initiate conversation with a user":
         update.message.reply_text(
-            "Por favor, inicie uma conversa comigo para que eu possa te enviar as regras!")
+            "Por favor, inicie uma conversa comigo para que eu possa te enviar uma mensagem!")
     elif error.message == "Forbidden: bot was blocked by the user":
         update.message.reply_text(
             "Você me bloqueou?! Tsc tsc. Que feio!!!🙄")
