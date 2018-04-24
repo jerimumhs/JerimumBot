@@ -129,9 +129,8 @@ def description(bot, update):
 
 def xinga(bot, update):
     """Send the Guilherme picture."""
-    bot.send_photo(chat_id=update.message.chat_id,
-                   photo=open('bot/imgs/guilherme.jpg', 'rb'),
-                   caption="Guilherme presente!")
+    bot.send_sticker(sticker="CAADAQADCgEAAmOWFQq4zU4TMS08AwI",
+                     chat_id=update.message.chat_id)
 
 
 def error(bot, update, error):
