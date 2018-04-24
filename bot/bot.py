@@ -35,23 +35,31 @@ def welcome(bot, update):
     ).format(first_name=update.message.new_chat_members[0].full_name)
     
     keyboard = [
-        [InlineKeyboardButton(
-            "Leia as regras!", 
-            callback_data='rules')],
-        
         [
-            [InlineKeyboardButton(
+            InlineKeyboardButton(
+                "Resumo das regras!", 
+                callback_data='rules')
+        ],
+        
+        [ 
+            InlineKeyboardButton(
                 "Nosso site!", 
                 callback_data='site', 
-                url="http://www.jerimumhs.org/")]
-            ], 
-            
-            [InlineKeyboardButton(
+                url="http://www.jerimumhs.org/"), 
+        
+            InlineKeyboardButton(
                 "Nosso Facebook!",
                 callback_data='site',
-                url="https://www.facebook.com/JerimumHS/")]
-            ]
+                url="https://www.facebook.com/JerimumHS/")
+        ],
+
+        [
+            InlineKeyboardButton(
+                "Nosso GitHub!",
+                callback_data='site',
+                url="https://github.com/jerimumhs/")
         ]
+    ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
 
