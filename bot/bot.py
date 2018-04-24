@@ -128,6 +128,9 @@ def error(bot, update, error):
     if error.message == "Forbidden: bot can't initiate conversation with a user":
         update.message.reply_text(
             "Por favor, inicie uma conversa comigo para que eu possa te enviar as regras!")
+    elif error.message == "Forbidden: bot was blocked by the user":
+        update.message.reply_text(
+            "Você me bloqueou?! Tsc tsc. Que feio!!!🙄")
     else:
         logger.warning('Update "%s" caused error "%s"', update, error)
 
