@@ -38,10 +38,19 @@ def welcome(bot, update):
         [InlineKeyboardButton(
             "Leia as regras!", 
             callback_data='rules')],
-        [InlineKeyboardButton(
-            "Visite nosso site!", 
-            callback_data='site', 
-            url="http://www.jerimumhs.org/")]
+        
+        [
+            [InlineKeyboardButton(
+                "Nosso site!", 
+                callback_data='site', 
+                url="http://www.jerimumhs.org/")]
+            ], 
+            
+            [InlineKeyboardButton(
+                "Nosso Facebook!",
+                callback_data='site',
+                url="https://www.facebook.com/JerimumHS/")]
+            ]
         ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
