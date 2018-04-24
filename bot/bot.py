@@ -50,11 +50,12 @@ def button(bot, update):
         bot.answer_callback_query(
             callback_query_id=query.id,
             text=(
-                "1 Respeite os participantes do grupo\n"
-                "2 Não compartilhar conteúdo sem autorização\n"
-                "3 Não envie SPAM\n"
-                "4 Proibido envio de material pornográfico\n"
-                "5 Havendo qualquer restrição as regras será banido"
+                "REGRAS:\n"
+                "1-Respeite os membros do grupo.\n"
+                "2-Não compartilhar conteúdo sem autorização.\n"
+                "3-Não envie SPAM.\n"
+                "4-Proibido envio de material pornográfico.\n"
+                "5-Havendo qualquer restrição as regras será banido."
             ),
             show_alert=True
         )
