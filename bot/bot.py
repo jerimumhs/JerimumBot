@@ -2,6 +2,7 @@ from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, CommandHandler,
                           MessageHandler, Filters, CallbackQueryHandler)
 import logging
+from pymongo import MongoClient
 
 from . import config
 
@@ -10,29 +11,37 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
+cliente = MongoClient('localhost', 27017)
+banco = cliente['JerimumHSBot']
+mensagens = banco['mensagens']
+
+
+def load_messages(group_id, message):
+    custom = mensagens.find_one({"_id": group_id})
+    if custom and custom.get(message):
+        return custom[message]
+    default = mensagens.find_one({"_id": "default"})
+    return default[message]
 
 def start(bot, update):
     """Send a message when the command /start is issued."""
-    update.message.reply_text('Para começar, basta digitar!')
+    start = (load_messages(
+        update.message.chat_id, "start"))
+    update.message.reply_text(start)
 
 
 def help(bot, update):
     """Send a message when the command /help is issued."""
-    help = (
-        "Está com duvidas? Fale com nossos membros!\n"
-        "Em caso de duvidas mais especificas procure nossos Administradores."
-    )
+    help = (load_messages(
+        update.message.chat_id, "help"))
     update.message.reply_text(help)
 
 
 def welcome(bot, update):
     """Send a message when a new user join the group."""
-    welcome = (
-        "Olá {full_name}, seja bem-vindo ao Jerimum Hackerspace\n\n"
-        "Somos um grupo de pessoas interessadas em usar, remixar e compartilhar "
-        "tecnologia, aprendizado, diversão e cultura de forma colaborativa e indiscriminada.\n\n"
-        "Leia nossas /regras e agora porque você não fala um pouco sobre você?"
-    ).format(full_name=update.message.new_chat_members[0].full_name)
+    welcome = (load_messages(
+        update.message.chat_id, "welcome")).format(
+            full_name=update.message.new_chat_members[0].full_name)
     
     keyboard = [
         [
@@ -62,7 +71,6 @@ def welcome(bot, update):
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
-
     update.message.reply_text(welcome, reply_markup=reply_markup)
 
 
@@ -73,12 +81,8 @@ def button(bot, update):
         bot.answer_callback_query(
             callback_query_id=query.id,
             text=(
-                "REGRAS:\n\n"
-                "1.Respeitar os membros do grupo\n"
-                "2.Não compartilhar conteúdo sem autorização\n"
-                "3.Não enviar Spam\n"
-                "4.Proibido envio de material pornográfico\n"
-                "5.Havendo qualquer restrição às regras, será banido"
+                (load_messages(
+                    update.message.chat_id, "rules_bit"))
             ),
             show_alert=True
         )
@@ -89,34 +93,15 @@ def button(bot, update):
 
 def bye(bot, update):
     """Send a message when a user leaves the group."""
-    bye = (
-        "{full_name} acabou de sair do grupo, uma palminha, e uma vainha...\n\n"
-        "UUUuuuUUuUUUuUUUuu"
-    ).format(full_name=update.message.left_chat_member.full_name)
+    bye = (load_messages(
+            update.message.chat_id, "bye")).format(
+                full_name=update.message.left_chat_member.full_name)
     update.message.reply_text(bye)
 
 def rules(bot, update):
     """Send a message with the group rules."""
-    rules = (
-        "1. Não haver discriminação em nenhum sentido, raça, religião, "
-        "sexo ou linguagem de programação.\n"
-        "2. Esse não é um grupo para discussões de política ou religião, "
-        "existe lugares para isso, mas não é aqui.\n"
-        "3. Evite mensagens religiosas, não somos contra religião, só "
-        "que esse grupo tem foco claro. \n"
-        "4. Evite postagens de cunho comercial, venda de produtos e "
-        "serviços, e outros tipos de ações correlacionadas. Não é "
-        "proibido, mas peça permissão aos administradores antes.\n"
-        "5. Não compartilhar conteúdo sem autorização ou que a licença"
-        " permita. \n"
-        "6. Proibido envio de vídeos ou imagens pornográficas, acidentes, "
-        "informações que não sejam de carácter tecnológico. \n"
-        "7. Não ficar fazendo flood conversando com o Guilherme_Bot.\n"
-        "8. Encontrou alguma mensagens em desacordo com nossas regras, "
-        "por favor avise nossos administradores.\n"
-        "9. Havendo qualquer restrição as regras será banido. \n\n"
-        "Att. Jerimum Hacker Bot <3"
-        )
+    rules = (load_messages(
+        update.message.chat_id, "rules_complete"))
     if adm_verify(update):
         update.message.reply_text(rules)
     else:        
@@ -127,15 +112,8 @@ def rules(bot, update):
 
 def description(bot, update):
     """Send a message with the group description."""
-    description = (
-        "O Jerimum Hackerspace é um local aberto e colaborativo que "
-        "fomenta a troca de conhecimento e experiências, onde as pessoas "
-        "podem se encontrar, socializar, compartilhar e colaborar. "
-        "Também onde entusiastas de tecnologia realizem projetos em "
-        "diversas áreas, como segurança, hardware, eletrônica, robótica, "
-        "espaçomodelismo, software, biologia, música, artes plásticas "
-        "ou o que mais a criatividade permitir."
-    )
+    description = (load_messages(
+        update.message.chat_id, "description"))
     if adm_verify(update):
         update.message.reply_text(description)
     else:        
