@@ -28,11 +28,11 @@ def help(bot, update):
 def welcome(bot, update):
     """Send a message when a new user join the group."""
     welcome = (
-        "Olá {first_name}, seja bem-vindo ao Jerimum Hackerspace\n\n"
+        "Olá {full_name}, seja bem-vindo ao Jerimum Hackerspace\n\n"
         "Somos um grupo de pessoas interessadas em usar, remixar e compartilhar "
         "tecnologia, aprendizado, diversão e cultura de forma colaborativa e indiscriminada.\n\n"
         "Leia nossas /regras e agora porque você não fala um pouco sobre você?"
-    ).format(first_name=update.message.new_chat_members[0].full_name)
+    ).format(full_name=update.message.new_chat_members[0].full_name)
     
     keyboard = [
         [
@@ -90,9 +90,9 @@ def button(bot, update):
 def bye(bot, update):
     """Send a message when a user leaves the group."""
     bye = (
-        "{first_name} acabou de sair do grupo, uma palminha, e uma vainha...\n\n"
+        "{full_name} acabou de sair do grupo, uma palminha, e uma vainha...\n\n"
         "UUUuuuUUuUUUuUUUuu"
-    ).format(first_name=update.message.left_chat_member.full_name)
+    ).format(full_name=update.message.left_chat_member.full_name)
     update.message.reply_text(bye)
 
 def rules(bot, update):
