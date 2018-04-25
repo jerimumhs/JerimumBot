@@ -4,7 +4,7 @@ cliente = MongoClient('localhost', 27017)
 banco = cliente['JerimumHSBot']
 mensagens = banco['mensagens']
 
-regras_completo = (
+rules_complete = (
     "1. Não haver discriminação em nenhum sentido, raça, religião, "
     "sexo ou linguagem de programação.\n"
     "2. Esse não é um grupo para discussões de política ou religião, "
@@ -25,7 +25,7 @@ regras_completo = (
     "Att. Jerimum Hacker Bot <3"
 )
 
-regras_resumo = (
+rules_bit = (
     "REGRAS:\n\n"
     "1.Respeitar os membros do grupo\n"
     "2.Não compartilhar conteúdo sem autorização\n"
@@ -44,24 +44,37 @@ description = (
     "ou o que mais a criatividade permitir."
 )
 
-boas_vindas = (
+welcome = (
     "Olá {full_name}, seja bem-vindo ao Jerimum Hackerspace\n\n"
     "Somos um grupo de pessoas interessadas em usar, remixar e compartilhar "
     "tecnologia, aprendizado, diversão e cultura de forma colaborativa e indiscriminada.\n\n"
     "Leia nossas /regras e agora porque você não fala um pouco sobre você?"
 )
 
-despedida = (
+bye = (
     "{full_name} acabou de sair do grupo, uma palminha, e uma vainha...\n\n"
     "UUUuuuUUuUUUuUUUuu"
 )
 
-mensagens.insert_one({
-    "_id": "default",
-        "regras_completo": regras_completo,
-        "regras_resumo": regras_resumo,
+help = (
+    "Está com duvidas? Fale com nossos membros!\n"
+    "Em caso de duvidas mais especificas procure nossos Administradores."
+)
+
+start = (
+    "Para começar, basta digitar!"
+)
+
+mensagens.update_one({
+    "_id": "default"},
+    {"$set":{
+        "start": start,
+        "rules_complete": rules_complete,
+        "rules_bit": rules_bit,
         "description": description,
-        "boas_vindas": boas_vindas,
-        "despedida": despedida
-    })
+        "welcome": welcome,
+        "bye": bye,
+        "help": help
+        }
+    }, upsert=True)
 
