@@ -131,11 +131,11 @@ def xinga(bot, update):
 def error(bot, update, error):
     """Log Errors caused by Updates."""
     if error.message == "Forbidden: bot can't initiate conversation with a user":
-        update.message.reply_text(
-            "Por favor, inicie uma conversa comigo para que eu possa te enviar uma mensagem!")
+        update.message.reply_text(load_messages(
+            update.message.chat_id, "error_initiate"))
     elif error.message == "Forbidden: bot was blocked by the user":
-        update.message.reply_text(
-            "Você me bloqueou?! Tsc tsc. Que feio!!!🙄")
+        update.message.reply_text(load_messages(
+            update.message.chat_id, "error_blocked"))
     else:
         logger.warning('Update "%s" caused error "%s"', update, error)
 

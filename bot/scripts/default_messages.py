@@ -65,6 +65,14 @@ start = (
     "Para começar, basta digitar!"
 )
 
+error_initiate = (
+    "Por favor, inicie uma conversa comigo para que eu possa te enviar uma mensagem!"
+)
+
+error_blocked = (
+    "Você me bloqueou?! Tsc tsc. Que feio!!!🙄"
+)
+
 mensagens.update_one({
     "_id": "default"},
     {"$set":{
@@ -74,7 +82,9 @@ mensagens.update_one({
         "description": description,
         "welcome": welcome,
         "bye": bye,
-        "help": help
+        "help": help,
+        "error_initiate": error_initiate,
+        "error_blocked": error_blocked
         }
     }, upsert=True)
 
