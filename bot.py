@@ -26,45 +26,14 @@ else:
 
 class JerimumBot(object):
     @staticmethod
-    def reply_text(bot, update, message, *args, **kwargs):
-        """Send the passed message"""
-        update.message.reply_text(bot, message, *args, **kwargs)
-
-    @staticmethod
-    def start(bot, update):
-        """Send a message when the command /start is issued."""
-        JerimumBot.reply_text(bot, update, START)
-
-    @staticmethod
-    def help(bot, update):
-        """Send a message when the command /help is issued."""
-        JerimumBot.reply_text(bot, update, START)
-
-    @staticmethod
     def description(bot, update):
         """Send a message with the group description."""
         if JerimumBot.adm_verify(update):
-            JerimumBot.reply_text(bot, update, DESCRIPTION)
+            update.message.reply_text(DESCRIPTION)
         else:
             bot.sendMessage(
                 chat_id=update.message.from_user.id,
                 text=DESCRIPTION)
-
-    @staticmethod
-    def xinga(bot, update):
-        """Send the Guilherme picture."""
-        bot.send_sticker(sticker="CAADAQADCgEAAmOWFQq4zU4TMS08AwI",
-                         chat_id=update.message.chat_id)
-
-    @staticmethod
-    def error(bot, update, err):
-        """Log Errors caused by Updates."""
-        if err.message == "Forbidden: bot can't initiate conversation with a user":
-            JerimumBot.reply_text(bot, update, ERROR_INITIATE)
-        elif err.message == "Forbidden: bot was blocked by the user":
-            JerimumBot.reply_text(bot, update, ERROR_BLOCKED)
-        else:
-            logger.warning('Update "%s" caused error "%s"', update, err)
 
     @staticmethod
     def welcome(bot, update):
@@ -99,23 +68,27 @@ class JerimumBot(object):
         ]
 
         reply_markup = InlineKeyboardMarkup(keyboard)
-        JerimumBot.reply_text(bot, update, welcome_message, reply_markup=reply_markup)
-
-    @staticmethod
-    def bye(bot, update):
-        """Send a message when a user leaves the group."""
-        bye_message = BYE.format.format(full_name=update.message.left_chat_member.full_name)
-        JerimumBot.reply_text(bot, update, bye_message)
+        update.message.reply_text(welcome_message, reply_markup=reply_markup)
 
     @staticmethod
     def rules(bot, update):
         """Send a message with the group rules."""
         if JerimumBot.adm_verify(update):
-            JerimumBot.reply_text(bot, update, RULES_COMPLETE)
+            update.message.reply_text(RULES_COMPLETE)
         else:
             bot.sendMessage(
                 chat_id=update.message.from_user.id,
                 text=RULES_COMPLETE)
+
+    @staticmethod
+    def error(bot, update, err):
+        """Log Errors caused by Updates."""
+        if err.message == "Forbidden: bot can't initiate conversation with a user":
+            update.message.reply_text(ERROR_INITIATE)
+        elif err.message == "Forbidden: bot was blocked by the user":
+            update.message.reply_text(ERROR_BLOCKED)
+        else:
+            logger.warning('Update "%s" caused error "%s"', update, err)
 
     @staticmethod
     def button(bot, update):
@@ -134,9 +107,7 @@ class JerimumBot(object):
 
     @staticmethod
     def adm_verify(update):
-        if update.message.chat.get_member(update.message.from_user.id).status in ('creator', 'administrator'):
-            return True
-        return False
+        return update.message.chat.get_member(update.message.from_user.id).status in ('creator', 'administrator')
 
     @staticmethod
     def run():
@@ -145,17 +116,22 @@ class JerimumBot(object):
 
         dp = updater.dispatcher
 
-        dp.add_handler(CommandHandler("start", JerimumBot.start))
-        dp.add_handler(CommandHandler("ajuda", JerimumBot.help))
         dp.add_handler(CommandHandler("regras", JerimumBot.rules))
-        dp.add_handler(CommandHandler("xinga", JerimumBot.xinga))
         dp.add_handler(CommandHandler("descricao", JerimumBot.description))
+
+        dp.add_handler(CommandHandler("start", lambda bot, update: update.message.reply_text(START)))
+        dp.add_handler(CommandHandler("ajuda", lambda bot, update: update.message.reply_text(HELP)))
+        dp.add_handler(CommandHandler("xinga", lambda bot, update: bot.send_sticker(
+            sticker="CAADAQADCgEAAmOWFQq4zU4TMS08AwI",
+            chat_id=update.message.chat_id)))
 
         dp.add_handler(MessageHandler(
             Filters.status_update.new_chat_members, JerimumBot.welcome))
 
         dp.add_handler(MessageHandler(
-            Filters.status_update.left_chat_member, JerimumBot.bye))
+            Filters.status_update.left_chat_member,
+            lambda bot, update: update.message.reply_text(
+                BYE.format.format(full_name=update.message.left_chat_member.full_name))))
 
         dp.add_handler(CallbackQueryHandler(JerimumBot.button))
 
