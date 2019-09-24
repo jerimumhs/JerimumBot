@@ -14,6 +14,67 @@ logger = logging.getLogger(__name__)
 
 
 class JerimumBot(object):
+    def __init__(self):
+        logging.info('Inicializando o bot...')
+        self.token = config('BOT_TOKEN', default='??')
+        self.port = config('PORT', default=8443)
+        self.heroku_app_name = config('HEROKU_APP_NAME', default='??')
+
+        self.updater = Updater(self.token)
+        self.config_handlers()
+
+    def config_handlers(self):
+        logging.info('Configurando comandos do bot...')
+        dp = self.updater.dispatcher
+
+        dp.add_handler(CommandHandler("regras", JerimumBot.rules))
+        dp.add_handler(CommandHandler("descricao", JerimumBot.description))
+
+        dp.add_handler(CommandHandler("start", lambda bot, update: update.message.reply_text(START)))
+        dp.add_handler(CommandHandler("ajuda", lambda bot, update: update.message.reply_text(HELP)))
+        dp.add_handler(CommandHandler("xinga", lambda bot, update: bot.send_sticker(
+            sticker="CAADAQADCgEAAmOWFQq4zU4TMS08AwI",
+            chat_id=update.message.chat_id)))
+
+        dp.add_handler(MessageHandler(
+            Filters.status_update.new_chat_members, JerimumBot.welcome))
+
+        dp.add_handler(MessageHandler(
+            Filters.status_update.left_chat_member,
+            lambda bot, update: update.message.reply_text(
+                BYE.format(full_name=update.message.left_chat_member.full_name))))
+
+        dp.add_handler(CallbackQueryHandler(JerimumBot.button))
+
+        dp.add_error_handler(JerimumBot.error)
+
+    def run_web(self):
+        """Start the bot."""
+
+        self.updater.start_webhook(
+            listen="0.0.0.0",
+            port=self.port,
+            url_path=self.token
+        )
+
+        self.updater.bot.set_webhook("https://{}.herokuapp.com/{}".format(self.heroku_app_name, self.token))
+
+        logging.info('Bot está rodando!')
+
+    def run_cmd(self):
+        self.updater.start_polling()
+        logging.info('Bot está rodando!')
+
+        self.updater.idle()
+
+    def run(self, mode='cmd'):
+        if mode == 'cmd':
+            self.run_cmd()
+        elif mode == 'web':
+            self.run_web()
+        else:
+            raise Exception('O modo passado não foi reconhecido')
+
     @staticmethod
     def description(bot, update):
         """Send a message with the group description."""
@@ -98,38 +159,8 @@ class JerimumBot(object):
     def adm_verify(update):
         return update.message.chat.get_member(update.message.from_user.id).status in ('creator', 'administrator')
 
-    @staticmethod
-    def run():
-        """Start the bot."""
-        updater = Updater(config('BOT_TOKEN', default='??'))
-
-        dp = updater.dispatcher
-
-        dp.add_handler(CommandHandler("regras", JerimumBot.rules))
-        dp.add_handler(CommandHandler("descricao", JerimumBot.description))
-
-        dp.add_handler(CommandHandler("start", lambda bot, update: update.message.reply_text(START)))
-        dp.add_handler(CommandHandler("ajuda", lambda bot, update: update.message.reply_text(HELP)))
-        dp.add_handler(CommandHandler("xinga", lambda bot, update: bot.send_sticker(
-            sticker="CAADAQADCgEAAmOWFQq4zU4TMS08AwI",
-            chat_id=update.message.chat_id)))
-
-        dp.add_handler(MessageHandler(
-            Filters.status_update.new_chat_members, JerimumBot.welcome))
-
-        dp.add_handler(MessageHandler(
-            Filters.status_update.left_chat_member,
-            lambda bot, update: update.message.reply_text(
-                BYE.format(full_name=update.message.left_chat_member.full_name))))
-
-        dp.add_handler(CallbackQueryHandler(JerimumBot.button))
-
-        dp.add_error_handler(JerimumBot.error)
-
-        updater.start_polling()
-
-        updater.idle()
-
 
 if __name__ == '__main__':
-    JerimumBot.run()
+    mode = config('MODE', default='cmd')
+    instance = JerimumBot()
+    instance.run(mode)
