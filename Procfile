@@ -1,1 +1,1 @@
-web: python bot.py $MODE web
+web: python bot.py
