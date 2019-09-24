@@ -17,7 +17,7 @@ class JerimumBot(object):
     def __init__(self):
         logging.info('Inicializando o bot...')
         self.token = config('BOT_TOKEN', default='??')
-        self.port = config('PORT', default=8443)
+        self.port = config('PORT', default=8443, cast=int)
         self.heroku_app_name = config('HEROKU_APP_NAME', default='??')
 
         self.updater = Updater(self.token)
@@ -60,11 +60,12 @@ class JerimumBot(object):
         self.updater.bot.set_webhook(f"https://{self.heroku_app_name}.herokuapp.com/{self.token}")
 
         logging.info('Bot está rodando!')
+        self.updater.idle()
 
     def run_cmd(self):
         self.updater.start_polling()
-        logging.info('Bot está rodando!')
 
+        logging.info('Bot está rodando!')
         self.updater.idle()
 
     def run(self, mode='cmd'):
