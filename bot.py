@@ -57,7 +57,7 @@ class JerimumBot(object):
             url_path=self.token
         )
 
-        self.updater.bot.set_webhook("https://{}.herokuapp.com/{}".format(self.heroku_app_name, self.token))
+        self.updater.bot.set_webhook(f"https://{self.heroku_app_name}.herokuapp.com/{self.token}")
 
         logging.info('Bot está rodando!')
 
@@ -161,6 +161,12 @@ class JerimumBot(object):
 
 
 if __name__ == '__main__':
-    mode = config('MODE', default='cmd')
     instance = JerimumBot()
-    instance.run(mode)
+    try:
+        instance.run(config('MODE', default='cmd'))
+    except Exception as e:
+        logging.error(f'Modo: {config("MODE", default="cmd")}')
+        logging.error(f'token: {instance.token}')
+        logging.error(f'Port: {instance.port}')
+        logging.error(f'heroku app name: {instance.heroku_app_name}')
+        raise e
