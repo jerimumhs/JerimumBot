@@ -2,3 +2,8 @@ config.json
 .vscode
 __pycache__
 *.pyc
+
+.env
+
+env/
+.idea/
