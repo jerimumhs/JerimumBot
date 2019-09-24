@@ -1,10 +1,9 @@
-import os
-import ujson
 import logging
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, CommandHandler,
                           MessageHandler, Filters, CallbackQueryHandler)
+from decouple import config
 
 from messages import *
 
@@ -12,16 +11,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
                     level=logging.INFO)
 
 logger = logging.getLogger(__name__)
-
-CONFIG_FILE = os.environ.get('JHS_CONFIG_FILE')
-
-if CONFIG_FILE:
-    with open(CONFIG_FILE) as file_pointer:
-        config = ujson.load(file_pointer)
-else:
-    config = {}
-    raise Exception(
-        "You didn't set \"JHS_CONFIG_FILE\" enviroment variable")
 
 
 class JerimumBot(object):
@@ -112,7 +101,7 @@ class JerimumBot(object):
     @staticmethod
     def run():
         """Start the bot."""
-        updater = Updater(config['telegram']['token'])
+        updater = Updater(config('BOT_TOKEN', default='??'))
 
         dp = updater.dispatcher
 
@@ -131,7 +120,7 @@ class JerimumBot(object):
         dp.add_handler(MessageHandler(
             Filters.status_update.left_chat_member,
             lambda bot, update: update.message.reply_text(
-                BYE.format.format(full_name=update.message.left_chat_member.full_name))))
+                BYE.format(full_name=update.message.left_chat_member.full_name))))
 
         dp.add_handler(CallbackQueryHandler(JerimumBot.button))
 
@@ -140,3 +129,7 @@ class JerimumBot(object):
         updater.start_polling()
 
         updater.idle()
+
+
+if __name__ == '__main__':
+    JerimumBot.run()
