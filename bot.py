@@ -145,21 +145,21 @@ class JerimumBot(object):
 
         dp = updater.dispatcher
 
-        dp.add_handler(CommandHandler("start", start))
-        dp.add_handler(CommandHandler("ajuda", help_))
-        dp.add_handler(CommandHandler("regras", rules))
-        dp.add_handler(CommandHandler("xinga", xinga))
-        dp.add_handler(CommandHandler("descricao", description))
+        dp.add_handler(CommandHandler("start", JerimumBot.start))
+        dp.add_handler(CommandHandler("ajuda", JerimumBot.help))
+        dp.add_handler(CommandHandler("regras", JerimumBot.rules))
+        dp.add_handler(CommandHandler("xinga", JerimumBot.xinga))
+        dp.add_handler(CommandHandler("descricao", JerimumBot.description))
 
         dp.add_handler(MessageHandler(
-            Filters.status_update.new_chat_members, welcome))
+            Filters.status_update.new_chat_members, JerimumBot.welcome))
 
         dp.add_handler(MessageHandler(
-            Filters.status_update.left_chat_member, bye))
+            Filters.status_update.left_chat_member, JerimumBot.bye))
 
-        dp.add_handler(CallbackQueryHandler(button))
+        dp.add_handler(CallbackQueryHandler(JerimumBot.button))
 
-        dp.add_error_handler(error)
+        dp.add_error_handler(JerimumBot.error)
 
         updater.start_polling()
 
