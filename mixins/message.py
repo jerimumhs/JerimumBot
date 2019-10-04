@@ -53,7 +53,12 @@ class MessageBotMixin(BotTelegramCore):
                 InlineKeyboardButton(
                     "Nosso GitHub!",
                     callback_data='site',
-                    url="https://github.com/jerimumhs/")
+                    url="https://github.com/jerimumhs/"),
+
+                InlineKeyboardButton(
+                    "Apoie-nos!",
+                    callback_data='site',
+                    url="https://picpay.me/jerimumhs/")
             ]
         ]
 

@@ -1,5 +1,13 @@
-python_telegram_bot==10.0.2
-ujson==1.35
+certifi==2019.9.11
+chardet==3.0.4
+future==0.17.1
+geojson==2.5.0
+idna==2.8
 pymongo==3.6.1
-telegram==0.0.1
+pyowm==2.10.0
 python-decouple==3.1
+python-telegram-bot==10.0.2
+requests==2.22.0
+telegram==0.0.1
+ujson==1.35
+urllib3==1.25.6
