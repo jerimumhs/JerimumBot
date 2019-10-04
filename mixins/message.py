@@ -41,7 +41,7 @@ class MessageBotMixin(BotTelegramCore):
                 InlineKeyboardButton(
                     "Nosso site!",
                     callback_data='site',
-                    url="http://www.jerimumhs.org/"),
+                    url="http://jerimumhacker.space/"),
 
                 InlineKeyboardButton(
                     "Nosso Facebook!",
