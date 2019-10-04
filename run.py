@@ -8,13 +8,20 @@ if __name__ == '__main__':
     instance = JerimumBot(
         token=config('BOT_TOKEN', default='??'),
         port=config('PORT', default=8443, cast=int),
-        heroku_app_name=config('HEROKU_APP_NAME', default='??')
+        webhook_url=config('WEBHOOK_URL', default='??')
     )
     try:
-        instance.run(config('MODE', default='cmd'))
+        mode = config('MODE', default='cmd')
+        if mode == 'cmd':
+            instance.run_cmd()
+        elif mode == 'web':
+            instance.run_web()
+        else:
+            raise Exception('O modo passado não foi reconhecido')
+
     except Exception as e:
         logging.error(f'Modo: {config("MODE", default="cmd")}')
         logging.error(f'token: {instance.token}')
         logging.error(f'Port: {instance.port}')
-        logging.error(f'heroku app name: {instance.heroku_app_name}')
+        logging.error(f'heroku app name: {instance.webhook_url}')
         raise e
