@@ -3,9 +3,10 @@ import logging
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import (Updater, CommandHandler,
                           MessageHandler, Filters, CallbackQueryHandler)
-from decouple import config
 
-from messages import *
+from messages import (START, HELP, BYE, DESCRIPTION,
+                      WELCOME, RULES_COMPLETE, RULES_BIT,
+                      ERROR_BLOCKED, ERROR_INITIATE)
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.INFO)
@@ -14,11 +15,11 @@ logger = logging.getLogger(__name__)
 
 
 class JerimumBot(object):
-    def __init__(self):
+    def __init__(self, token, port, heroku_app_name):
         logging.info('Inicializando o bot...')
-        self.token = config('BOT_TOKEN', default='??')
-        self.port = config('PORT', default=8443, cast=int)
-        self.heroku_app_name = config('HEROKU_APP_NAME', default='??')
+        self.token = token
+        self.port = port
+        self.heroku_app_name = heroku_app_name
 
         self.updater = Updater(self.token)
         self.config_handlers()
@@ -159,15 +160,3 @@ class JerimumBot(object):
     @staticmethod
     def adm_verify(update):
         return update.message.chat.get_member(update.message.from_user.id).status in ('creator', 'administrator')
-
-
-if __name__ == '__main__':
-    instance = JerimumBot()
-    try:
-        instance.run(config('MODE', default='cmd'))
-    except Exception as e:
-        logging.error(f'Modo: {config("MODE", default="cmd")}')
-        logging.error(f'token: {instance.token}')
-        logging.error(f'Port: {instance.port}')
-        logging.error(f'heroku app name: {instance.heroku_app_name}')
-        raise e
