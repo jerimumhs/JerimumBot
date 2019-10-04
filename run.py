@@ -8,7 +8,7 @@ if __name__ == '__main__':
     instance = JerimumBot(
         token=config('BOT_TOKEN', default='??'),
         port=config('PORT', default=8443, cast=int),
-        webhook_url=config('WEBHOOK_URL', default='??')
+        server_url=config('SERVER_URL', default='??')
     )
     try:
         mode = config('MODE', default='cmd')
@@ -23,5 +23,5 @@ if __name__ == '__main__':
         logging.error(f'Modo: {config("MODE", default="cmd")}')
         logging.error(f'token: {instance.token}')
         logging.error(f'Port: {instance.port}')
-        logging.error(f'heroku app name: {instance.webhook_url}')
+        logging.error(f'heroku app name: {instance.server_url}')
         raise e

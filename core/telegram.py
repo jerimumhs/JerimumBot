@@ -11,11 +11,11 @@ logger = logging.getLogger(__name__)
 
 
 class BotTelegramCore(ABC):
-    def __init__(self, token, port, webhook_url):
+    def __init__(self, token, port, server_url):
         logging.info('Inicializando o bot...')
         self.token = token
         self.port = port
-        self.webhook_url = webhook_url
+        self.server_url = server_url
 
         self.updater = Updater(self.token)
         self.config_handlers()
@@ -33,7 +33,7 @@ class BotTelegramCore(ABC):
             url_path=self.token
         )
 
-        self.updater.bot.set_webhook(f"{self.webhook_url}/{self.token}")
+        self.updater.bot.set_webhook(f"{self.server_url}/{self.token}")
 
         logging.info('Bot está rodando!')
         self.updater.idle()
