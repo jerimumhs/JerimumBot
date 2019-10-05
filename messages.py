@@ -1,10 +1,4 @@
-from pymongo import MongoClient
-
-cliente = MongoClient('localhost', 27017)
-banco = cliente['JerimumHSBot']
-mensagens = banco['mensagens']
-
-rules_complete = (
+RULES_COMPLETE = (
     "1. Não haver discriminação em nenhum sentido, raça, religião, "
     "sexo ou linguagem de programação.\n"
     "2. Esse não é um grupo para discussões de política ou religião, "
@@ -25,7 +19,7 @@ rules_complete = (
     "Att. Jerimum Hacker Bot <3"
 )
 
-rules_bit = (
+RULES_BIT = (
     "REGRAS:\n\n"
     "1.Respeitar os membros do grupo\n"
     "2.Não compartilhar conteúdo sem autorização\n"
@@ -34,7 +28,7 @@ rules_bit = (
     "5.Havendo qualquer restrição às regras, será banido"
 )
 
-description = (
+DESCRIPTION = (
     "O Jerimum Hackerspace é um local aberto e colaborativo que "
     "fomenta a troca de conhecimento e experiências, onde as pessoas "
     "podem se encontrar, socializar, compartilhar e colaborar. "
@@ -44,47 +38,31 @@ description = (
     "ou o que mais a criatividade permitir."
 )
 
-welcome = (
+WELCOME = (
     "Olá {full_name}, seja bem-vindo ao Jerimum Hackerspace\n\n"
     "Somos um grupo de pessoas interessadas em usar, remixar e compartilhar "
     "tecnologia, aprendizado, diversão e cultura de forma colaborativa e indiscriminada.\n\n"
     "Leia nossas /regras e agora porque você não fala um pouco sobre você?"
 )
 
-bye = (
+BYE = (
     "{full_name} acabou de sair do grupo, uma palminha, e uma vainha...\n\n"
     "UUUuuuUUuUUUuUUUuu"
 )
 
-help = (
+HELP = (
     "Está com duvidas? Fale com nossos membros!\n"
     "Em caso de duvidas mais especificas procure nossos Administradores."
 )
 
-start = (
+START = (
     "Para começar, basta digitar!"
 )
 
-error_initiate = (
+ERROR_INITIATE = (
     "Por favor, inicie uma conversa comigo para que eu possa te enviar uma mensagem!"
 )
 
-error_blocked = (
+ERROR_BLOCKED = (
     "Você me bloqueou?! Tsc tsc. Que feio!!!🙄"
 )
-
-mensagens.update_one({
-    "_id": "default"},
-    {"$set":{
-        "start": start,
-        "rules_complete": rules_complete,
-        "rules_bit": rules_bit,
-        "description": description,
-        "welcome": welcome,
-        "bye": bye,
-        "help": help,
-        "error_initiate": error_initiate,
-        "error_blocked": error_blocked
-        }
-    }, upsert=True)
-
