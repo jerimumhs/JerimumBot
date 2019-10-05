@@ -66,21 +66,7 @@ Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz d
 
   <details>
 
-  Para essa parte do guia, você precisará ter um sistema de gerenciamento de pacotes instalado. Sugerimos que use o [pip](https://pypi.org/project/pip/).
-
-  Talvez você já tenha o `pip` instalado. Para verificar isso, basta executar:
-
-  ~~~~
-  pip --version
-  ~~~~
-
-  Caso não o tenha, pode simplesmente instalar via (em sistemas operacionais baseados no Ubuntu/Debian):
-
-  ~~~~
-  sudo apt install python-pip
-  ~~~~
-
-  Antes de prosseguir, é válido instalar estes pacotes (caso ainda não os tenha):
+  Antes de prosseguir, instale estes pacotes:
 
   ~~~~
   sudo apt install build-essential python3-dev libssl-dev libffi-dev \
@@ -115,10 +101,10 @@ Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz d
   Na primeira linha do arquivo você encontrará
 
   ~~~~
-  export BOT_TOKEN=
+  export BOT_TOKEN=meu_token_123
   ~~~~
 
-  O token que será colocado nessa linha é o que foi gerado quando você criou o seu bot, no passo anterior.
+  Substitua `meu_token_123` pelo que token que foi gerado quando você criou o seu bot, no passo anterior.
 
   Por último, você precisará carregar as variáveis de ambiente do arquivo `.env` no seu terminal:
 
