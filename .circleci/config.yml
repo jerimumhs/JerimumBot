@@ -10,7 +10,7 @@ commands:
     steps:
       - checkout
       - run: make config.env
-      - run: make pip.install
+      - run: sudo pip install -r requirements.txt
 
 jobs:
   test:
