@@ -15,16 +15,6 @@ Em breve...
 
 Em breve...
 
-## Histórico de lançamentos
-
-
-* 0.0.2
-    * Nova organização
-    * MUDANÇA: criação de classe e mixins
-    * MUDANÇA: função clima adicionada
-* 0.0.1
-    * Guilherme is alive
-
 ### Autores
 
 * **Geraldo Castro** - *Code / Ideas / Review* - [exageraldo](https://github.com/exageraldo)
