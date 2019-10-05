@@ -9,3 +9,4 @@ requests==2.22.0
 soupsieve==1.9.4
 telegram==0.0.1
 urllib3==1.25.6
+uwsgi==2.0.18
