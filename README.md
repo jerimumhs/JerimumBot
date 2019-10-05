@@ -2,7 +2,15 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![GitHub version](https://badge.fury.io/gh/boennemann%2Fbadges.svg)](http://badge.fury.io/gh/boennemann%2Fbadges)
-[![Open Source Love](https://badges.frapsoft.com/os/gpl/gpl.svg?v=102)](https://github.com/ellerbrock/open-source-badge/)
+![GitHub](https://img.shields.io/github/license/jerimumhs/jerimumbot)
+![GitHub language count](https://img.shields.io/github/languages/count/jerimumhs/jerimumbot)
+![GitHub top language](https://img.shields.io/github/languages/top/jerimumhs/jerimumbot)
+![GitHub issues](https://img.shields.io/github/issues/jerimumhs/jerimumbot)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/jerimumhs/jerimumbot)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/jerimumhs/jerimumbot)
+![GitHub contributors](https://img.shields.io/github/contributors/jerimumhs/jerimumbot)
+![GitHub last commit](https://img.shields.io/github/last-commit/jerimumhs/jerimumbot)
+
 
 > É o bot do Telegram controlado pelo Guilherme, o gato mais bonito e simpático do mundo, com finalidade de ajudar a 
 comunidade do [Jerimum Hackerspace](http://jerimumhs.org/).
