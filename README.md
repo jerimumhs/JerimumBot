@@ -1,7 +1,6 @@
 # Jerimum Bot
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![GitHub version](https://badge.fury.io/gh/boennemann%2Fbadges.svg)](http://badge.fury.io/gh/boennemann%2Fbadges)
 ![GitHub](https://img.shields.io/github/license/jerimumhs/jerimumbot)
 ![GitHub language count](https://img.shields.io/github/languages/count/jerimumhs/jerimumbot)
 ![GitHub top language](https://img.shields.io/github/languages/top/jerimumhs/jerimumbot)
