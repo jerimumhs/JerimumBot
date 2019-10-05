@@ -1,3 +1,11 @@
-python_telegram_bot==10.0.2
-telegram==0.0.1
+beautifulsoup4==4.8.0
+certifi==2019.9.11
+chardet==3.0.4
+future==0.17.1
+idna==2.8
 python-decouple==3.1
+python-telegram-bot==10.0.2
+requests==2.22.0
+soupsieve==1.9.4
+telegram==0.0.1
+urllib3==1.25.6
