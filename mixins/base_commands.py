@@ -1,5 +1,7 @@
 import logging
 import pyowm
+
+from pyowm.exceptions.api_response_error import NotFoundError
 from decouple import config
 
 from telegram.ext import CommandHandler
@@ -51,19 +53,17 @@ class BaseCommandsBotMixin(BotTelegramCore):
         """Define weather at certain location"""
         api_key = config('OPENWEATHERMAP_TOKEN')
         owm = pyowm.OWM(api_key)
-        text_location = "".join(str(x) for x in args)
-        observation = owm.weather_at_place(text_location)
-        w = observation.get_weather()
-        humidity = w.get_humidity()
-        wind = w.get_wind()
-        temp = w.get_temperature('celsius')
-        convert_temp = temp.get('temp')
-        convert_wind = wind.get('speed')
-        convert_humidity = humidity
-        text_temp = str(convert_temp)
-        text_wind = str(convert_wind)
-        text_humidity = str(convert_humidity)
-        update.message.reply_text("O clima hoje em {} está: \n"
-                                  "🌡 Temperatura: {} celsius \n"
-                                  "💨 Velocidade do Vento: {} m/s \n"
-                                  "💧 Humidade: {}%".format(text_location, text_temp, text_wind, text_humidity))
+        text_location = " ".join(args)
+        try:
+            observation = owm.weather_at_place(text_location)
+        except NotFoundError:
+            update.message.reply_text(f"⚠️ Não consegui localizar a cidade {text_location}!")
+        weather = observation.get_weather()
+        humidity = weather.get_humidity()
+        wind = weather.get_wind()
+        temp = weather.get_temperature('celsius')
+        update.message.reply_text(f"🧭 Localização: {text_location}\n"
+                                  f"🔥️ Temperatura Maxima: {temp.get('temp_max')} celsius \n"
+                                  f"❄️ Temparatura Minima: {temp.get('temp_min')} celsius\n"
+                                  f"💨 Velocidade do Vento: {wind.get('speed')} m/s \n"
+                                  f"💧 Humidade: {humidity}%")
