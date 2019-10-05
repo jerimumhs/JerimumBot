@@ -24,7 +24,7 @@ Em breve...
 
 * **Geraldo Castro** - *`Code` / `Ideas` / `Review`* - [exageraldo](https://github.com/exageraldo)
 * **Rodrigo Castro** - *`Code` / `Ideas` / `Review`* - [rodrigondec](https://github.com/rodrigondec)
-* **Allan Kardec** - *Code / Ideas* - [kaardeco](https://github.com/kaardeco)
+* **Allan Kardec** - *`Code` / `Ideas`* - [kaardeco](https://github.com/kaardeco)
 
 ## Contributing
 
