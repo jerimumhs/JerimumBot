@@ -14,16 +14,125 @@
 > É o bot do Telegram controlado pelo Guilherme, o gato mais bonito e simpático do mundo, com finalidade de ajudar a 
 comunidade do [Jerimum Hackerspace](http://jerimumhs.org/).
 
+## Instalação e Configuração para Desenvolvimento
 
-## Instalação
+Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz de executar sua própria instância do nosso bot.
 
-Em breve...
+<details>
+  
+  ### Clonando o repositório
+  
+  <details>
+   
+   Para instalar o bot, o primeiro passo é clonar o repositório no seu ambiente local. Isso pode ser
+   feito através do seguinte comando, via terminal:
+
+   ~~~~
+   git clone https://github.com/jerimumhs/JerimumBot.git
+   ~~~~
+
+   Com isso pronto, basta entrar no diretório recém criado:
+
+   ~~~~
+   cd JerimumBot/
+   ~~~~
+  </details>  
+
+  ### Criando um ambiente virtual
+  
+  <details>
+  
+  Antes de prosseguir na execução do bot, você precisará criar um ambiente virtual. Existem maneiras diferentes de fazer isso, porém, nesse tutorial, mostraremos apenas uma.
+
+  Utilizando Python3, basta executar:
+
+  ~~~~
+  python3 -m venv {{nome_do_seu_venv}}
+  ~~~~
+
+  Onde `{{nome_do_seu_venv}}` deve ser substituído por um nome de sua escolha.
+
+  Agora, será necessário ativar este ambiente:
+
+  ~~~~
+  source {{nome_do_seu_venv}}/bin/activate
+  ~~~~
+
+  Para mais informações sobre o assunto, basta ler a [documentação oficial](https://docs.python.org/3/library/venv.html).
+
+  </details>
+  
+  ### Instalando dependências do projeto
+
+  <details>
+
+  Instale estes pacotes:
+
+  ~~~~
+  sudo apt install build-essential python3-dev libssl-dev libffi-dev \
+                   libxml2-dev libxslt1-dev zlib1g-dev
+  ~~~~
+
+  Depois disso, dentro do repositório clonado, basta executar:
+
+  ~~~~
+  pip install -r requirements.txt
+  ~~~~
+  
+  </details>
+
+  ### Criando seu próprio bot no Telegram
+
+  <details>
+  
+  Você precisará criar o seu próprio bot no Telegram para testar/desenvolver o JerimumBot. É um processo bastante rápido e simples.
+  Inicialmente, acesse a página do [BotFather](https://telegram.me/BotFather) e clique em `Send Message`.
+
+  A partir daí, o Telegram tentará abrir o aplicativo dele na sua máquina. Caso você não o tenha instalado, pode abrir o Telegram Web (ou até mesmo a versão mobile) e pesquisar por `BotFather`. Ao localizá-lo, inicie a conversa com um `/start` e siga as instruções para criar um novo bot. Ao fim, copie o token gerado, que será necessário na próxima seção.
+
+  </details>
+  
+  ### Configurando o .env no seu repositório local
+  
+  <details>
+
+  Você já está quase lá! Agora é necessário configurar a sua versão local do `.env`. Já existe um arquivo chamado `.env.example` na raiz do diretório. Copie o conteúdo dele para um novo arquivo chamando `.env`.
+
+  Na primeira linha do arquivo você encontrará
+
+  ~~~~
+  export BOT_TOKEN=meu_token_123
+  ~~~~
+
+  Substitua `meu_token_123` pelo token que foi gerado quando você criou o seu bot, no passo anterior.
+
+  Por último, você precisará carregar as variáveis de ambiente do arquivo `.env` no seu terminal:
+
+  ~~~~
+  source .env
+  ~~~~
+  
+  </details>
+
+  ### Executando o JerimumBot
+  
+  <details>
+
+  Depois de ter seguido todos os passos desse tutorial até aqui, você está com tudo pronto para executar o JerimumBot. Basta executar o comando `make run` e... pronto!
+  
+  </details>
+
+  ### Testando a sua instância
+  
+  <details>
+
+  Depois disso, você pode testar as funcionalidades do JerimumBot no chat do próprio bot que você criou anteriormente. Todos os     comandos do JerimumBot estarão disponíveis para você, além dos novos que você possa ter desenvolvido.
+  
+  </details>
+  
+</details>
 
 ## Exemplo de uso
-
-Em breve...
-
-## Configuração para Desenvolvimento
 
 Em breve...
 
