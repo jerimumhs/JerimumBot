@@ -18,102 +18,133 @@ comunidade do [Jerimum Hackerspace](http://jerimumhs.org/).
 
 Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz de executar sua própria instância do nosso bot.
 
-### Clonando o repositório
+<details>
+  
+  ### Clonando o repositório
+  
+  <details>
+   
+   Para instalar o bot, o primeiro passo é clonar o repositório no seu ambiente local. Isso pode ser
+   feito através do seguinte comando, via terminal:
 
-Para instalar o bot, o primeiro passo é clonar o repositório no seu ambiente local. Isso pode ser
-feito através do seguinte comando, via terminal:
+   ~~~~
+   git clone https://github.com/jerimumhs/JerimumBot.git
+   ~~~~
 
-~~~~
-git clone https://github.com/jerimumhs/JerimumBot.git
-~~~~
+   Com isso pronto, basta entrar no diretório recém criado:
 
-Com isso pronto, basta entrar no diretório recém criado:
+   ~~~~
+   cd JerimumBot/
+   ~~~~
+  </details>  
 
-~~~~
-cd JerimumBot/
-~~~~
+  ### Criando um ambiente virtual
+  
+  <details>
+  
+  Antes de prosseguir na execução do bot, você precisará criar um ambiente virtual. Existem maneiras diferentes de fazer isso, porém, nesse tutorial, mostraremos apenas uma.
 
-### Criando um ambiente virtual
+  Utilizando Python3, basta executar:
 
-Antes de prosseguir na execução do bot, você precisará criar um ambiente virtual. Existem maneiras diferentes de fazer isso, porém, nesse tutorial, mostraremos apenas uma.
+  ~~~~
+  python3 -m venv {{nome_do_seu_venv}}
+  ~~~~
 
-Utilizando Python3, basta executar:
+  Onde `{{nome_do_seu_venv}}` deve ser substituído por um nome de sua escolha.
 
-~~~~
-python3 -m venv {{nome_do_seu_venv}}
-~~~~
+  Agora, será necessário ativar este ambiente:
 
-Onde `{{nome_do_seu_venv}}` deve ser substituído por um nome de sua escolha.
+  ~~~~
+  source {{nome_do_seu_venv}}/bin/activate
+  ~~~~
 
-Agora, será necessário ativar este ambiente:
+  Para mais informações sobre o assunto, basta ler a [documentação oficial](https://docs.python.org/3/library/venv.html).
 
-~~~~
-source {{nome_do_seu_venv}}/bin/activate
-~~~~
+  </details>
+  
+  ### Instalando dependências do projeto
 
-Para mais informações sobre o assunto, basta ler a [documentação oficial](https://docs.python.org/3/library/venv.html).
+  <details>
 
-### Instalando dependências do projeto
+  Para essa parte do guia, você precisará ter um sistema de gerenciamento de pacotes instalado. Sugerimos que use o [pip](https://pypi.org/project/pip/).
 
-Para essa parte do guia, você precisará ter um sistema de gerenciamento de pacotes instalado. Sugerimos que use o [pip](https://pypi.org/project/pip/).
+  Talvez você já tenha o `pip` instalado. Para verificar isso, basta executar:
 
-Talvez você já tenha o `pip` instalado. Para verificar isso, basta executar:
+  ~~~~
+  pip --version
+  ~~~~
 
-~~~~
-pip --version
-~~~~
+  Caso não o tenha, pode simplesmente instalar via (em sistemas operacionais baseados no Ubuntu/Debian):
 
-Caso não o tenha, pode simplesmente instalar via (em sistemas operacionais baseados no Ubuntu/Debian):
+  ~~~~
+  sudo apt install python-pip
+  ~~~~
 
-~~~~
-sudo apt install python-pip
-~~~~
+  Antes de prosseguir, é válido instalar estes pacotes (caso ainda não os tenha):
 
-Antes de prosseguir, é válido instalar estes pacotes (caso ainda não os tenha):
+  ~~~~
+  sudo apt install build-essential python3-dev libssl-dev libffi-dev \
+                   libxml2-dev libxslt1-dev zlib1g-dev
+  ~~~~
 
-~~~~
-sudo apt install build-essential python3-dev libssl-dev libffi-dev \
-                 libxml2-dev libxslt1-dev zlib1g-dev
-~~~~
+  Depois disso, dentro do repositório clonado, basta executar:
 
-Depois disso, dentro do repositório clonado, basta executar:
+  ~~~~
+  pip install -r requirements.txt
+  ~~~~
+  
+  </details>
 
-~~~~
-pip install -r requirements.txt
-~~~~
+  ### Criando seu próprio bot no Telegram
 
-### Criando seu próprio bot no Telegram
+  <details>
+  
+  Você precisará criar o seu próprio bot no Telegram para testar/desenvolver o JerimumBot. É um processo bastante rápido e simples.
+  Inicialmente, acesse a página do [BotFather](https://telegram.me/BotFather) e clique em `Send Message`.
 
-Você precisará criar o seu próprio bot no Telegram para testar/desenvolver o JerimumBot. É um processo bastante rápido e simples.
-Inicialmente, acesse a página do [BotFather](https://telegram.me/BotFather) e clique em `Send Message`.
+  A partir daí, o Telegram tentará abrir o aplicativo dele na sua máquina. Caso você não o tenha instalado, pode abrir o Telegram Web (ou até mesmo a versão mobile) e pesquisar por `BotFather`. Ao localizá-lo, inicie a conversa com um `/start` e siga as instruções para criar um novo bot. Ao fim, copie o token gerado, que será necessário na próxima seção.
 
-A partir daí, o Telegram tentará abrir o aplicativo dele na sua máquina. Caso você não o tenha instalado, pode abrir o Telegram Web (ou até mesmo a versão mobile) e pesquisar por `BotFather`. Ao localizá-lo, inicie a conversa com um `/start` e siga as instruções para criar um novo bot. Ao fim, copie o token gerado, que será necessário na próxima seção.
+  </details>
+  
+  ### Configurando o .env no seu repositório local
+  
+  <details>
 
-### Configurando o .env no seu repositório local
+  Você já está quase lá! Agora é necessário configurar a sua versão local do `.env`. Já existe um arquivo chamado `.env.example` na raiz do diretório. Copie o conteúdo dele para um novo arquivo chamando `.env`.
 
-Você já está quase lá! Agora é necessário configurar a sua versão local do `.env`. Já existe um arquivo chamado `.env.example` na raiz do diretório. Copie o conteúdo dele para um novo arquivo chamando `.env`.
+  Na primeira linha do arquivo você encontrará
 
-Na primeira linha do arquivo você encontrará
+  ~~~~
+  export BOT_TOKEN=
+  ~~~~
 
-~~~~
-export BOT_TOKEN=
-~~~~
+  O token que será colocado nessa linha é o que foi gerado quando você criou o seu bot, no passo anterior.
 
-O token que será colocado nessa linha é o que foi gerado quando você criou o seu bot, no passo anterior.
+  Por último, você precisará carregar as variáveis de ambiente do arquivo `.env` no seu terminal:
 
-Por último, você precisará carregar as variáveis de ambiente do arquivo `.env` no seu terminal:
+  ~~~~
+  source .env
+  ~~~~
+  
+  </details>
 
-~~~~
-source .env
-~~~~
+  ### Executando o JerimumBot
+  
+  <details>
 
-### Executando o JerimumBot
+  Depois de ter seguido todos os passos desse tutorial até aqui, você está com tudo pronto para executar o JerimumBot. Basta executar o comando `make run` e... pronto!
+  
+  </details>
 
-Depois de ter seguido todos os passos desse tutorial até aqui, você está com tudo pronto para executar o JerimumBot. Basta executar o comando `make run` e... pronto!
+  ### Testando a sua instância
+  
+  <details>
 
-### Testando a sua instância
-
-Depois disso, você pode testar as funcionalidades do JerimumBot no chat do próprio bot que você criou anteriormente. Todos os comandos do JerimumBot estarão disponíveis para você, além dos novos que você possa ter desenvolvido.
+  Depois disso, você pode testar as funcionalidades do JerimumBot no chat do próprio bot que você criou anteriormente. Todos os     comandos do JerimumBot estarão disponíveis para você, além dos novos que você possa ter desenvolvido.
+  
+  </details>
+  
+</details>
 
 ## Exemplo de uso
 
