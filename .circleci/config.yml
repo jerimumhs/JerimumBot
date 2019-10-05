@@ -1,0 +1,25 @@
+version: 2.1
+
+executors:
+  python-executor:
+    docker:
+      - image: circleci/python:3.7
+
+commands:
+  base-command:
+    steps:
+      - checkout
+      - run: make config.env
+
+jobs:
+  test:
+    executor: python-executor
+    steps:
+      - base-command
+      - run: make test
+
+workflows:
+  version: 2.1
+  tests:
+    jobs:
+      - test
