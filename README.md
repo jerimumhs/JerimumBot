@@ -1,6 +1,7 @@
 # Jerimum Bot
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![CircleCI](https://img.shields.io/circleci/build/github/jerimumhs/JerimumBot)](https://circleci.com/gh/jerimumhs/JerimumBot)
 ![GitHub](https://img.shields.io/github/license/jerimumhs/jerimumbot)
 ![GitHub language count](https://img.shields.io/github/languages/count/jerimumhs/jerimumbot)
 ![GitHub top language](https://img.shields.io/github/languages/top/jerimumhs/jerimumbot)
