@@ -56,14 +56,15 @@ class BaseCommandsBotMixin(BotTelegramCore):
         text_location = " ".join(args)
         try:
             observation = owm.weather_at_place(text_location)
+            weather = observation.get_weather()
+            humidity = weather.get_humidity()
+            wind = weather.get_wind()
+            temp = weather.get_temperature('celsius')
+            update.message.reply_text(f"🧭 Localização: {text_location}\n"
+                                      f"🔥️ Temperatura Maxima: {temp.get('temp_max')} celsius \n"
+                                      f"❄️ Temparatura Minima: {temp.get('temp_min')} celsius\n"
+                                      f"💨 Velocidade do Vento: {wind.get('speed')} m/s \n"
+                                      f"💧 Humidade: {humidity}%")
         except NotFoundError:
             update.message.reply_text(f"⚠️ Não consegui localizar a cidade {text_location}!")
-        weather = observation.get_weather()
-        humidity = weather.get_humidity()
-        wind = weather.get_wind()
-        temp = weather.get_temperature('celsius')
-        update.message.reply_text(f"🧭 Localização: {text_location}\n"
-                                  f"🔥️ Temperatura Maxima: {temp.get('temp_max')} celsius \n"
-                                  f"❄️ Temparatura Minima: {temp.get('temp_min')} celsius\n"
-                                  f"💨 Velocidade do Vento: {wind.get('speed')} m/s \n"
-                                  f"💧 Humidade: {humidity}%")
+
