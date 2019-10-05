@@ -10,6 +10,7 @@ commands:
     steps:
       - checkout
       - run: make config.env
+      - run: make pip.install
 
 jobs:
   test:
