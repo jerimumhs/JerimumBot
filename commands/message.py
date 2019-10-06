@@ -7,15 +7,18 @@ from core import BotTelegramCore
 from messages import BYE, WELCOME
 
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
 
 def welcome(bot, update):
     """Send a message when a new user join the group."""
-    welcome_message = WELCOME.format(full_name=update.message.new_chat_members[0].full_name)
+    welcome_message = WELCOME.format(
+        full_name=update.message.new_chat_members[0].full_name
+    )
 
     keyboard = [
         [

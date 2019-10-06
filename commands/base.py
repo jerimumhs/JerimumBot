@@ -6,8 +6,9 @@ from core import BotTelegramCore, adm_verify
 from messages import START, HELP, DESCRIPTION, RULES_COMPLETE
 
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
@@ -39,5 +40,10 @@ def config_handlers(instance: BotTelegramCore):
     dp.add_handler(CommandHandler("regras", rules))
     dp.add_handler(CommandHandler("descricao", description))
 
-    dp.add_handler(CommandHandler("start", lambda bot, update: update.message.reply_text(START)))
-    dp.add_handler(CommandHandler("ajuda", lambda bot, update: update.message.reply_text(HELP)))
+    dp.add_handler(
+        CommandHandler("start",
+                       lambda bot, update: update.message.reply_text(START)))
+
+    dp.add_handler(
+        CommandHandler("ajuda",
+                       lambda bot, update: update.message.reply_text(HELP)))
