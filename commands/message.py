@@ -34,16 +34,21 @@ def welcome(bot, update):
                 url="https://jerimumhacker.space/"),
 
             InlineKeyboardButton(
-                "Nosso Facebook!",
+                "Apoie-nos!",
                 callback_data='site',
-                url="https://www.facebook.com/JerimumHS/")
+                url="https://www.picpay.me/JerimumHS/")
         ],
 
         [
             InlineKeyboardButton(
                 "Nosso GitHub!",
                 callback_data='site',
-                url="https://github.com/jerimumhs/")
+                url="https://github.com/jerimumhs/"),
+
+            InlineKeyboardButton(
+                "Nosso Facebook!",
+                callback_data='site',
+                url="https://www.facebook.com/JerimumHS/")
         ]
     ]
 

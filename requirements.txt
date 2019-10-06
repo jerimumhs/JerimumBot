@@ -4,10 +4,12 @@ chardet==3.0.4
 entrypoints==0.3
 flake8==3.7.8
 future==0.17.1
+geojson==2.5.0
 idna==2.8
 mccabe==0.6.1
 pycodestyle==2.5.0
 pyflakes==2.1.1
+pyowm==2.10.0
 python-decouple==3.1
 python-telegram-bot==10.0.2
 requests==2.22.0
