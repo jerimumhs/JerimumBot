@@ -31,7 +31,7 @@ def welcome(bot, update):
             InlineKeyboardButton(
                 "Nosso site!",
                 callback_data='site',
-                url="http://jerimumhacker.space/"),
+                url="https://jerimumhacker.space/"),
 
             InlineKeyboardButton(
                 "Nosso Facebook!",
