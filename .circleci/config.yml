@@ -13,6 +13,12 @@ commands:
       - run: sudo pip install -r requirements.txt
 
 jobs:
+  flake8:
+    executor: python-executor
+    steps:
+      - base-command
+      - run: make flake8
+
   test:
     executor: python-executor
     steps:
@@ -23,4 +29,5 @@ workflows:
   version: 2.1
   tests:
     jobs:
+      - flake8
       - test

@@ -6,8 +6,9 @@ from core import BotTelegramCore
 from messages import RULES_BIT
 
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
@@ -29,4 +30,6 @@ def handle_callback(bot, update):
 
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando callback handler do bot...')
-    instance.updater.dispatcher.add_handler(CallbackQueryHandler(handle_callback))
+    instance.updater.dispatcher.add_handler(
+        CallbackQueryHandler(handle_callback)
+    )

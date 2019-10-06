@@ -1,8 +1,6 @@
 import logging
 import random
 import re
-import time
-import urllib.request
 
 from bs4 import BeautifulSoup
 import requests
@@ -10,10 +8,12 @@ from telegram.ext import CommandHandler
 
 from core import BotTelegramCore
 
-logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+logging.basicConfig(
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    level=logging.INFO)
 
 logger = logging.getLogger(__name__)
+
 
 def coach(bot, update):
     """Manda uma mensagem motivacional"""
@@ -36,7 +36,8 @@ def coach(bot, update):
     soup_two = BeautifulSoup(response_two.content, 'html.parser')
     frases = soup_two.find_all(class_='fr')
 
-    update.message.reply_text(frases[random.randint(0,len(frases))].get_text())
+    update.message.reply_text(frases[random.randint(0, len(frases))].get_text())
+
 
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando comandos de coach quantico do bot...')

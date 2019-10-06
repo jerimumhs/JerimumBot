@@ -4,6 +4,9 @@ run:
 test:
 	python -m unittest discover tests
 
+flake8:
+	flake8
+
 config.env:
 	cp .env.example .env
 
