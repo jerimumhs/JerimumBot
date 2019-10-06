@@ -1,1 +1,1 @@
-web: python run.py
+web: uwsgi --ini uwsgi.ini
