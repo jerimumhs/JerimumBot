@@ -1,11 +1,9 @@
 import logging
-import pyowm
 
+import pyowm
 from pyowm.exceptions.api_response_error import NotFoundError
 from pyowm.exceptions.api_call_error import APICallError
-
 from decouple import config
-
 from telegram.ext import CommandHandler
 
 from core import BotTelegramCore
