@@ -14,7 +14,7 @@ commands:
 
 jobs:
   flake8:
-    executor: machine-executor
+    executor: python-executor
     steps:
       - base-command
       - run: make flake8
@@ -29,5 +29,5 @@ workflows:
   version: 2.1
   tests:
     jobs:
-      - test
       - flake8
+      - test
