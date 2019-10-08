@@ -63,7 +63,7 @@ Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz d
 
   </details>
 
-  ### Instalando dependências do projeto
+  ### Instalando dependências do projeto!
 
   <details>
 
