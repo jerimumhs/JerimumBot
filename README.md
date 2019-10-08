@@ -7,10 +7,10 @@
 ![GitHub top language](https://img.shields.io/github/languages/top/jerimumhs/jerimumbot)
 ![GitHub issues](https://img.shields.io/github/issues/jerimumhs/jerimumbot)
 ![GitHub closed issues](https://img.shields.io/github/issues-closed/jerimumhs/jerimumbot)
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/jerimumhs/jerimumbot)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/jerimumhs/jerimumbot)
 ![GitHub contributors](https://img.shields.io/github/contributors/jerimumhs/jerimumbot)
 ![GitHub last commit](https://img.shields.io/github/last-commit/jerimumhs/jerimumbot)
-
+![GitHub forks](https://img.shields.io/github/forks/jerimumhs/jerimumbot?style=social)
 
 > É o bot do Telegram controlado pelo Guilherme, o gato mais bonito e simpático do mundo, com finalidade de ajudar a
 comunidade do [Jerimum Hackerspace](http://jerimumhs.org/).

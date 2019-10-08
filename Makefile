@@ -12,3 +12,6 @@ config.env:
 
 pip.install:
 	pip install -r requirements.txt
+
+heroku.purge_cache:
+	heroku repo:purge_cache -a jerimumhsbot
