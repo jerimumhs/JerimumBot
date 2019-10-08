@@ -31,7 +31,8 @@ class ThrottleDecorator(object):
             self.last_run = now
             return self.func(*args, **kwargs)
 
-        logging.info(f"O comando sofreu throttle. Faltam {self.last_run + self.interval - now} seconds")
+        logging.info(f"O comando sofreu throttle. "
+                     f"Faltam {self.last_run + self.interval - now} seconds")
 
     @property
     def last_run(self):
@@ -49,6 +50,8 @@ class ThrottleDecorator(object):
 
 def throttle(interval=300, shared=True):
     def apply_decorator(func):
-        decorator = ThrottleDecorator(func=func, interval=interval, shared=shared)
+        decorator = ThrottleDecorator(
+            func=func, interval=interval, shared=shared
+        )
         return wraps(func)(decorator)
     return apply_decorator
