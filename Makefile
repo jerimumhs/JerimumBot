@@ -2,7 +2,7 @@ run:
 	python run.py
 
 test:
-	python -m unittest discover tests
+	python -m unittest discover
 
 flake8:
 	flake8
