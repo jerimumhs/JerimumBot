@@ -42,7 +42,7 @@ def coach(bot, update, args):
     total_match = re.search(r"\d+", text_total)
     string_total = total_match.group(0)
 
-    total_pages = int(string_total) // QTY_POSTS_PER_PAGE
+    total_pages = int(string_total) // QTY_POSTS_PER_PAGE or 1
 
     random_page = random.randint(1, total_pages)
     response_two = requests.get(f'{url_search}{random_page}', timeout=1)
