@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 QTY_POSTS_PER_PAGE = 20
 
 
-@throttle()
+# @throttle()
 def coach(bot, update, args):
     url_base = 'https://www.pensador.com'
 
