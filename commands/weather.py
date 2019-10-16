@@ -15,7 +15,7 @@ logging.basicConfig(format='%(asctime)s - %(name)s - '
 logger = logging.getLogger(__name__)
 
 
-@throttle()
+# @throttle()
 def weather(bot, update, args):
     """Define weather at certain location"""
     api_key = config('OPENWEATHERMAP_TOKEN')
