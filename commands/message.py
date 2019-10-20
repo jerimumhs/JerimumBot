@@ -55,7 +55,9 @@ def welcome(bot, update):
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text(welcome_message, reply_markup=reply_markup, parse_mode=ParseMode.MARKDOWN)
+    update.message.reply_text(welcome_message,
+                              reply_markup=reply_markup,
+                              parse_mode=ParseMode.MARKDOWN)
 
 
 def config_handlers(instance: BotTelegramCore):
