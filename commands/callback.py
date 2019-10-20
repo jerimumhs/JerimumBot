@@ -30,6 +30,7 @@ def handle_callback(bot, update):
 
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando callback handler do bot...')
-    instance.updater.dispatcher.add_handler(
+
+    instance.add_handler(
         CallbackQueryHandler(handle_callback)
     )

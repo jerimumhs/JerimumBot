@@ -57,5 +57,5 @@ def coach(bot, update, args):
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando comandos de coach quantico do bot...')
 
-    instance.updater.dispatcher.add_handler(
+    instance.add_handler(
         CommandHandler("coach", coach, pass_args=True))
