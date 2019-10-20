@@ -46,5 +46,4 @@ def weather(bot, update, args):
 def config_handlers(instance: BotTelegramCore):
     logging.info('Psicografando satelites climaticos...')
 
-    instance.updater.dispatcher.\
-        add_handler(CommandHandler("clima", weather, pass_args=True))
+    instance.add_handler(CommandHandler("clima", weather, pass_args=True))

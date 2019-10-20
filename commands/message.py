@@ -63,10 +63,10 @@ def welcome(bot, update):
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando message handlers do bot...')
 
-    instance.updater.dispatcher.add_handler(MessageHandler(
+    instance.add_handler(MessageHandler(
         Filters.status_update.new_chat_members, welcome))
 
-    instance.updater.dispatcher.add_handler(MessageHandler(
+    instance.add_handler(MessageHandler(
         Filters.status_update.left_chat_member,
         lambda bot, update: update.message.reply_text(
             BYE.format(
