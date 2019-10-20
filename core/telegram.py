@@ -1,3 +1,4 @@
+from time import sleep
 from abc import ABC, abstractmethod
 import logging
 
@@ -12,6 +13,13 @@ logger = logging.getLogger(__name__)
 
 
 class BotTelegramCore(ABC):
+    __instance = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls.__instance:
+            cls.__instance = super().__new__(cls)
+        return cls.__instance
+
     def __init__(self, token, port, server_url):
         logging.info('Inicializando o bot...')
         self.token = token
@@ -20,6 +28,13 @@ class BotTelegramCore(ABC):
 
         self.updater = Updater(self.token)
         self.config_handlers()
+
+    @classmethod
+    def instance(cls):
+        while cls.__instance is None:
+            logging.info('Esperando bot ser inicializado...')
+            sleep(1)
+        return cls.__instance
 
     @abstractmethod
     def config_handlers(self):
