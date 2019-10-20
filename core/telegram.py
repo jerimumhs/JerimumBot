@@ -30,6 +30,12 @@ class BotTelegramCore(ABC):
         self.config_handlers()
 
     @classmethod
+    def send_message(cls, chat_id, text, parse_mode=None):
+        instance = cls.instance()
+        assert isinstance(instance, BotTelegramCore)
+        instance.updater.bot.send_message(chat_id=chat_id, text=text, parse_mode=parse_mode)
+
+    @classmethod
     def instance(cls):
         while cls.__instance is None:
             logging.info('Esperando bot ser inicializado...')
