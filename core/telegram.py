@@ -1,4 +1,3 @@
-from time import sleep
 from abc import ABC, abstractmethod
 import logging
 
@@ -32,7 +31,11 @@ class BotTelegramCore(ABC):
     def send_message(cls, chat_id, text, parse_mode=None):
         instance = cls.instance()
         assert isinstance(instance, BotTelegramCore)
-        instance.__updater.bot.send_message(chat_id=chat_id, text=text, parse_mode=parse_mode)
+        instance.__updater.bot.send_message(
+            chat_id=chat_id,
+            text=text,
+            parse_mode=parse_mode
+        )
 
     @classmethod
     def instance(cls):
