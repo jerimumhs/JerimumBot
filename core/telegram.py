@@ -25,6 +25,7 @@ class BotTelegramCore(ABC):
         self.token = token
 
         self.__updater = Updater(self.token)
+        self.__running = False
         self.config_handlers()
 
     @classmethod
@@ -54,6 +55,10 @@ class BotTelegramCore(ABC):
 
     def run(self):
         """Start the bot as a python script loop"""
-        self.__updater.start_polling()
+        if not self.__running:
+            self.__updater.start_polling()
 
-        logging.info('Bot está rodando como um script python!')
+            logging.info('Bot está rodando como um script python!')
+            self.__running = True
+        else:
+            logging.info('Bot já está rodando!')
