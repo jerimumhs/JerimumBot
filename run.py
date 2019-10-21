@@ -1,5 +1,3 @@
-import logging
-
 from decouple import config
 
 from app import app
