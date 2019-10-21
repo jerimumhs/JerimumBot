@@ -35,15 +35,13 @@ def rules(bot, update):
 
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando comandos base do bot...')
-    dp = instance.updater.dispatcher
+    instance.add_handler(CommandHandler("regras", rules))
+    instance.add_handler(CommandHandler("descricao", description))
 
-    dp.add_handler(CommandHandler("regras", rules))
-    dp.add_handler(CommandHandler("descricao", description))
-
-    dp.add_handler(
+    instance.add_handler(
         CommandHandler("start",
                        lambda bot, update: update.message.reply_text(START)))
 
-    dp.add_handler(
+    instance.add_handler(
         CommandHandler("ajuda",
                        lambda bot, update: update.message.reply_text(HELP)))

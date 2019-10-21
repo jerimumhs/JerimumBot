@@ -1,6 +1,6 @@
 import logging
 
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode
 from telegram.ext import MessageHandler, Filters
 
 from core import BotTelegramCore
@@ -16,8 +16,10 @@ logger = logging.getLogger(__name__)
 
 def welcome(bot, update):
     """Send a message when a new user join the group."""
+    new_member = update.message.new_chat_members[0]
+
     welcome_message = WELCOME.format(
-        full_name=update.message.new_chat_members[0].full_name
+        full_name=f'[{new_member.full_name}](tg://user?id={new_member.id})'
     )
 
     keyboard = [
@@ -53,16 +55,24 @@ def welcome(bot, update):
     ]
 
     reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text(welcome_message, reply_markup=reply_markup)
+    update.message.reply_text(welcome_message,
+                              reply_markup=reply_markup,
+                              parse_mode=ParseMode.MARKDOWN)
 
 
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando message handlers do bot...')
 
-    instance.updater.dispatcher.add_handler(MessageHandler(
+    instance.add_handler(MessageHandler(
         Filters.status_update.new_chat_members, welcome))
 
-    instance.updater.dispatcher.add_handler(MessageHandler(
+    instance.add_handler(MessageHandler(
         Filters.status_update.left_chat_member,
         lambda bot, update: update.message.reply_text(
-            BYE.format(full_name=update.message.left_chat_member.full_name))))
+            BYE.format(
+                full_name=f'[{update.message.left_chat_member.full_name}]'
+                          f'(tg://user?id={update.message.left_chat_member.id})'
+            ),
+            parse_mode=ParseMode.MARKDOWN
+        )
+    ))
