@@ -1,5 +1,3 @@
-import logging
-
 from decouple import config
 
 from app import app
@@ -7,7 +5,6 @@ from bot import JerimumBot
 
 
 if __name__ == '__main__':
-    bot = JerimumBot(token=config('BOT_TOKEN', default='??'))
+    JerimumBot.run()
 
-    bot.run()
     app.run(host='0.0.0.0', port=config('PORT', default=5000, cast=int))
