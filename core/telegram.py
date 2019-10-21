@@ -36,9 +36,6 @@ class BotTelegramCore(ABC):
 
     @classmethod
     def instance(cls):
-        while cls.__instance is None:
-            logging.info('Esperando bot ser inicializado...')
-            sleep(1)
         return cls.__instance
 
     @abstractmethod
