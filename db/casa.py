@@ -44,3 +44,7 @@ class Status(Document):
     @property
     def sticker(self):
         return self.CHOICES.get(self._value).get('sticker')
+
+    @classmethod
+    def now(cls):
+        return cls.objects.order_by('-_datetime').first()
