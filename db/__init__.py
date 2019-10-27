@@ -1,7 +1,7 @@
 from decouple import config
 from mongoengine import *
 
-from db.casa import Status
+from db.house import Status
 
 
 connect(
