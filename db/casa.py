@@ -30,3 +30,17 @@ class Status(Document):
     @property
     def datetime(self):
         return pendulum.instance(self._datetime).in_tz('America/Sao_Paulo')
+
+    @property
+    def value(self):
+        return self.CHOICES.get(self._value).get('name')
+
+    @value.setter
+    def value(self, key):
+        if key not in self.CHOICES.keys():
+            raise ValueError(f'O valor deve estar entre {self.CHOICES.keys()}')
+        self._value = key
+
+    @property
+    def sticker(self):
+        return self.CHOICES.get(self._value).get('sticker')
