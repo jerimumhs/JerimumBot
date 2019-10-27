@@ -1,7 +1,7 @@
 from decouple import config
-from mongoengine import *
+from mongoengine import connect
 
-from db.house import Status
+from db.house import Status  # noqa F401
 
 
 connect(
