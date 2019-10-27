@@ -1,6 +1,8 @@
 from decouple import config
 from mongoengine import *
 
+from db.casa import Status
+
 
 connect(
     db=config('DB_NAME'),
