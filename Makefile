@@ -36,16 +36,19 @@ docker.down:
 docker.bash:
 	docker-compose run bot bash
 
-docker.bot.stop:
-	docker stop $(current_dir)_bot_1
-
-docker.bot.restart: docker.bot.stop docker.up
-
 docker.test:
 	docker-compose run bot pytest
 
 docker.flake8:
 	docker-compose run bot flake8
+
+docker.bot.stop:
+	docker stop $(current_dir)_bot_1
+
+docker.bot.restart: docker.bot.stop docker.up
+
+docker.volumes.remove: docker.down
+	docker volume rm $(current_dir)_mongo_volume
 
 ##############################
 ###### HEROKU COMMANDS ######

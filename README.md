@@ -140,6 +140,7 @@ Nas linhas 9 à 13 você encontrará linha do arquivo você encontrará
     DB_HOST=mongo
     DB_NAME=mongo
     DB_PORT=27017
+    DB_AUTH=admin
 
 Substitua os valores de acordo com a configuração de seu mongo nos passo anterior.
 

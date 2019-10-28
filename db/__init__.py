@@ -10,5 +10,5 @@ connect(
     password=config('DB_PASSWORD'),
     host=config('DB_HOST'),
     port=config('DB_PORT', cast=int),
-    authentication_source='admin'
+    authentication_source=config('DB_AUTH')
 )
