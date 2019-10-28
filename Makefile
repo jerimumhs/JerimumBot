@@ -10,7 +10,7 @@ run:
 	python run.py
 
 test:
-	python -m unittest discover
+	pytest
 
 flake8:
 	flake8
@@ -42,7 +42,7 @@ docker.bot.stop:
 docker.bot.restart: docker.bot.stop docker.up
 
 docker.test:
-	docker-compose run bot python -m unittest discover
+	docker-compose run bot pytest
 
 docker.flake8:
 	docker-compose run bot flake8
