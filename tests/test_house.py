@@ -12,7 +12,7 @@ class StatusTest(TestCase):
     def test_ordering(self):
         s1 = Status(user=123,
                     _value=Status.ABERTA,
-                    _datetime=pendulum.yesterday())
+                    _datetime=pendulum.yesterday()).save()
         Status(user=123,
                _value=Status.FECHADA,
                _datetime=pendulum.now()).save()
