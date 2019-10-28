@@ -38,6 +38,7 @@ Com isso pronto, basta entrar no diretório recém criado:
 </details>  
 
 ### Configurando o ambiente
+<details>
 Para rodar nosso bot é necessário `Python` e `Mongo`. Pode ser utilizado o docker para facilitar a utilizar ou realizar a instalação dessas tecnologias,
 
 #### instalação Python + Mongo
@@ -106,7 +107,8 @@ Para construir a imagem da aplicação rode o comando
     make docker.build
 
 </details>
-  
+
+</details>
 
   ### Criando seu próprio bot no Telegram
 
