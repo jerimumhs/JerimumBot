@@ -10,14 +10,22 @@ from tests.fixtures import mongo  # noqa F401
 @pytest.mark.usefixtures('mongo')
 class StatusTest(TestCase):
     def test_ordering(self):
-        s1 = Status(user=123, _value=Status.ABERTA, _datetime=pendulum.yesterday()).save()
-        Status(user=123, _value=Status.FECHADA, _datetime=pendulum.now()).save()
+        s1 = Status(user=123,
+                    _value=Status.ABERTA,
+                    _datetime=pendulum.yesterday())
+        Status(user=123,
+               _value=Status.FECHADA,
+               _datetime=pendulum.now()).save()
         self.assertAlmostEqual(Status.objects.count(), 2)
         self.assertEqual(Status.objects.first(), s1)
 
     def test_now_ordering(self):
-        Status(user=123, _value=Status.ABERTA, _datetime=pendulum.yesterday()).save()
-        s2 = Status(user=123, _value=Status.FECHADA, _datetime=pendulum.now()).save()
+        Status(user=123,
+               _value=Status.ABERTA,
+               _datetime=pendulum.yesterday()).save()
+        s2 = Status(user=123,
+                    _value=Status.FECHADA,
+                    _datetime=pendulum.now()).save()
         self.assertAlmostEqual(Status.objects.count(), 2)
         self.assertEqual(Status.now(), s2)
 
@@ -34,12 +42,16 @@ class StatusTest(TestCase):
     def test_get_value(self):
         s = Status.aberta(123)
         self.assertAlmostEqual(Status.objects.count(), 1)
-        self.assertEqual(s.value, Status.CHOICES.get(Status.ABERTA).get('name'))
+        self.assertEqual(s.value,
+                         Status.CHOICES
+                         .get(Status.ABERTA).get('name'))
 
     def test_set_value(self):
         s = Status.aberta(123)
         self.assertAlmostEqual(Status.objects.count(), 1)
-        self.assertEqual(Status.now().value, Status.CHOICES.get(Status.ABERTA).get('name'))
+        self.assertEqual(Status.now().value,
+                         Status.CHOICES
+                         .get(Status.ABERTA).get('name'))
 
         s.value = 'f'
         self.assertEqual(s._value, 'f')
@@ -52,4 +64,6 @@ class StatusTest(TestCase):
     def test_sticker(self):
         s = Status.aberta(123)
         self.assertAlmostEqual(Status.objects.count(), 1)
-        self.assertEqual(s.sticker, Status.CHOICES.get(Status.ABERTA).get('sticker'))
+        self.assertEqual(s.sticker,
+                         Status.CHOICES
+                         .get(Status.ABERTA).get('sticker'))
