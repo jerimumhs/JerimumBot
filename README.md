@@ -19,11 +19,9 @@ comunidade do [Jerimum Hackerspace](http://jerimumhs.org/).
 
 Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz de executar sua própria instância do nosso bot.
 
-<details>
+<details><summary>Guia de instalação</summary>
 
-  ### Clonando o repositório
-
-  <details>
+  <details><summary>### Clonando o repositório</summary>
 
    Para instalar o bot, o primeiro passo é clonar o repositório no seu ambiente local. Isso pode ser
    feito através do seguinte comando, via terminal:
@@ -54,11 +52,23 @@ Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz d
   Onde `{{nome_do_seu_venv}}` deve ser substituído por um nome de sua escolha.
 
   Agora, será necessário ativar este ambiente:
-
-  ~~~~
-  source {{nome_do_seu_venv}}/bin/activate
-  ~~~~
-
+   
+  
+  <details> <summary>Linux</summary>
+  
+    ~~~~
+    source {{nome_do_seu_venv}}/bin/activate
+    ~~~~
+  </details>
+  
+    
+   <details> <summary>Windows</summary>
+  
+    ~~~~
+    {{nome_do_seu_venv}}/bin/activate.bat
+    ~~~~
+  </details>
+    
   Para mais informações sobre o assunto, basta ler a [documentação oficial](https://docs.python.org/3/library/venv.html).
 
   </details>
