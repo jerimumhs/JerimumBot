@@ -21,72 +21,78 @@ Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz d
 
 <details><summary>Guia de instalação</summary>
 
-  ### Clonando o repositório
+### Clonando o repositório
 
-  <details><summary>Utilizando Git</summary>
+<details><summary>Utilizando Git</summary>
 
-   Para instalar o bot, o primeiro passo é clonar o repositório no seu ambiente local. Isso pode ser
-   feito através do seguinte comando, via terminal:
+Para instalar o bot, o primeiro passo é clonar o repositório no seu ambiente local. Isso pode ser
+feito através do seguinte comando, via terminal:
 
 
     git clone https://github.com/jerimumhs/JerimumBot.git
 
-
-   Com isso pronto, basta entrar no diretório recém criado:
-
+Com isso pronto, basta entrar no diretório recém criado:
 
     cd JerimumBot/
 
-  </details>  
+</details>  
 
-  ### Criando um ambiente virtual
-  
-  Antes de prosseguir na execução do bot, você precisará criar um ambiente virtual. Existem maneiras diferentes de fazer isso.
+### Configurando o ambiente
+Para rodar nosso bot é necessário `Python` e `Mongo`. Pode ser utilizado o docker para facilitar a utilizar ou realizar a instalação dessas tecnologias,
 
-  <details><summary>utilizando venv</summary>
-  
-  Utilizando Python3.6, basta executar:
+#### instalação Python + Mongo
+<details><summary>Python</summary>
 
-    python3 -m venv {{nome_do_seu_venv}}
+É necessário ter algum python a cima da versão 3.6 siga a [documentação oficial](https://www.python.org/downloads/) para instalar.
 
-  Onde `{{nome_do_seu_venv}}` deve ser substituído por um nome de sua escolha.
+##### Criando um ambiente virtual
+Antes de prosseguir na execução do bot, você precisará criar um ambiente virtual. Existem maneiras diferentes de fazer isso.
 
-  Agora, será necessário ativar este ambiente execute o comando referente ao seu SO:
-   
-  
-  <details> <summary>Linux</summary>
-  
+<details><summary>utilizando venv</summary>
+
+Utilizando Python3.6, basta executar:
+
+python3 -m venv {{nome_do_seu_venv}}
+
+Onde `{{nome_do_seu_venv}}` deve ser substituído por um nome de sua escolha.
+
+Agora, será necessário ativar este ambiente execute o comando referente ao seu SO:
+
+
+<details> <summary>Linux</summary>
+
     source {{nome_do_seu_venv}}/bin/activate
-  </details>
-  
-    
-   <details> <summary>Windows</summary>
-   
+</details>
+
+
+<details> <summary>Windows</summary>
+
     {{nome_do_seu_venv}}/bin/activate.bat
-  </details>
-    
-  Para mais informações sobre o assunto, basta ler a [documentação oficial](https://docs.python.org/3/library/venv.html).
+</details>
 
-  </details>
+Para mais informações sobre o assunto, basta ler a [documentação oficial](https://docs.python.org/3/library/venv.html).
 
-  ### Instalando dependências do projeto
+</details>
 
-  <details>
+##### Instalando dependências
+Instale as dependências de desenvolvimento do python
   
-  <details><summary>Linux Debian Based</summary>
+<details><summary>Linux Debian Based</summary>
 
-  Instale estes pacotes:
+Instale estes pacotes:
 
-  ~~~~
-  sudo apt install build-essential python3-dev libssl-dev libffi-dev \
-                   libxml2-dev libxslt1-dev zlib1g-dev
-  ~~~~
-  </details>
-  Depois disso, dentro do repositório clonado, basta executar:
+~~~~
+sudo apt install build-essential python3-dev libssl-dev libffi-dev \
+               libxml2-dev libxslt1-dev zlib1g-dev
+~~~~
+</details>
+Depois disso, dentro do repositório clonado, basta executar:
 
-    pip install -r requirements.txt
+    pip install -r requirements-dev.txt
 
-  </details>
+</details>
+  
+  
 
   ### Criando seu próprio bot no Telegram
 
@@ -120,7 +126,8 @@ Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz d
 
   ### Executando o JerimumBot
 
-  <details>
+  <details><summary>Python + Mongo</summary>
+  Para executar 
 
   Depois de ter seguido todos os passos desse tutorial até aqui, você está com tudo pronto para executar o JerimumBot. Basta executar o comando `make run` e... pronto!
 
