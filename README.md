@@ -98,10 +98,13 @@ Siga a [documentação oficial](https://docs.mongodb.com/manual/installation/)
 
 #### instalação Docker
 <details><summary>Docker</summary>
+
 Para rodar nosso bot no docker é nessecário ter o `docker-ce` e `docker-compose`. Siga as documentações oficiais para instalar o [docker-ce](https://docs.docker.com/install/) e o [docker-compose](https://docs.docker.com/compose/install/)
 
 Para construir a imagem da aplicação rode o comando
+
     make docker.build
+
 </details>
   
 
