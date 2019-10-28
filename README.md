@@ -52,7 +52,7 @@ Antes de prosseguir na execução do bot, você precisará criar um ambiente vir
 
 Utilizando Python3.6, basta executar:
 
-python3 -m venv {{nome_do_seu_venv}}
+    python3 -m venv {{nome_do_seu_venv}}
 
 Onde `{{nome_do_seu_venv}}` deve ser substituído por um nome de sua escolha.
 
@@ -91,7 +91,18 @@ Depois disso, dentro do repositório clonado, basta executar:
     pip install -r requirements-dev.txt
 
 </details>
-  
+
+<details><summary>Mongo</summary>
+Siga a [documentação oficial](https://docs.mongodb.com/manual/installation/)
+</details>
+
+#### instalação Docker
+<details><summary>Docker</summary>
+Para rodar nosso bot no docker é nessecário ter o `docker-ce` e `docker-compose`. Siga as documentações oficiais para instalar o [docker-ce](https://docs.docker.com/install/) e o [docker-compose](https://docs.docker.com/compose/install/)
+
+Para construir a imagem da aplicação rode o comando
+    make docker.build
+</details>
   
 
   ### Criando seu próprio bot no Telegram
