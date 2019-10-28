@@ -21,52 +21,48 @@ Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz d
 
 <details><summary>Guia de instalação</summary>
 
-  <details><summary>### Clonando o repositório</summary>
+  ### Clonando o repositório
+
+  <details><summary>Utilizando Git</summary>
 
    Para instalar o bot, o primeiro passo é clonar o repositório no seu ambiente local. Isso pode ser
    feito através do seguinte comando, via terminal:
 
-   ~~~~
-   git clone https://github.com/jerimumhs/JerimumBot.git
-   ~~~~
+
+    git clone https://github.com/jerimumhs/JerimumBot.git
+
 
    Com isso pronto, basta entrar no diretório recém criado:
 
-   ~~~~
-   cd JerimumBot/
-   ~~~~
+
+    cd JerimumBot/
+
   </details>  
 
   ### Criando um ambiente virtual
+  
+  Antes de prosseguir na execução do bot, você precisará criar um ambiente virtual. Existem maneiras diferentes de fazer isso.
 
-  <details>
-
-  Antes de prosseguir na execução do bot, você precisará criar um ambiente virtual. Existem maneiras diferentes de fazer isso, porém, nesse tutorial, mostraremos apenas uma.
-
+  <details><summary>utilizando venv</summary>
+  
   Utilizando Python3.6, basta executar:
 
-  ~~~~
-  python3 -m venv {{nome_do_seu_venv}}
-  ~~~~
+    python3 -m venv {{nome_do_seu_venv}}
 
   Onde `{{nome_do_seu_venv}}` deve ser substituído por um nome de sua escolha.
 
-  Agora, será necessário ativar este ambiente:
+  Agora, será necessário ativar este ambiente execute o comando referente ao seu SO:
    
   
   <details> <summary>Linux</summary>
   
-    ~~~~
     source {{nome_do_seu_venv}}/bin/activate
-    ~~~~
   </details>
   
     
    <details> <summary>Windows</summary>
-  
-    ~~~~
+   
     {{nome_do_seu_venv}}/bin/activate.bat
-    ~~~~
   </details>
     
   Para mais informações sobre o assunto, basta ler a [documentação oficial](https://docs.python.org/3/library/venv.html).
@@ -76,6 +72,8 @@ Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz d
   ### Instalando dependências do projeto
 
   <details>
+  
+  <details><summary>Linux Debian Based</summary>
 
   Instale estes pacotes:
 
@@ -83,12 +81,10 @@ Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz d
   sudo apt install build-essential python3-dev libssl-dev libffi-dev \
                    libxml2-dev libxslt1-dev zlib1g-dev
   ~~~~
-
+  </details>
   Depois disso, dentro do repositório clonado, basta executar:
 
-  ~~~~
-  pip install -r requirements.txt
-  ~~~~
+    pip install -r requirements.txt
 
   </details>
 
@@ -111,18 +107,15 @@ Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz d
 
   Na primeira linha do arquivo você encontrará
 
-  ~~~~
-  export BOT_TOKEN=meu_token_123
-  ~~~~
+    BOT_TOKEN=meu_token_123
 
   Substitua `meu_token_123` pelo token que foi gerado quando você criou o seu bot, no passo anterior.
 
   Por último, você precisará carregar as variáveis de ambiente do arquivo `.env` no seu terminal:
-
-  ~~~~
-  source .env
-  ~~~~
-
+  <details><summary>Linux</summary>
+  
+    source .env
+  </details>
   </details>
 
   ### Executando o JerimumBot
