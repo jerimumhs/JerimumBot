@@ -27,6 +27,12 @@ class Status(Document):
     def __str__(self):
         return f'{self.datetime}: {self.value}'
 
+    def __eq__(self, other):
+        try:
+            return self.id == other.id
+        except AttributeError:
+            return False
+
     @property
     def datetime(self):
         return pendulum.instance(self._datetime).in_tz('America/Sao_Paulo')
