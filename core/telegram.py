@@ -18,8 +18,12 @@ class BotTelegramCore(ABC):
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
             if cls == BotTelegramCore:
-                raise TypeError('Cannot initilize instance from BotTelegramCore')
-            BotTelegramCore._instance = super(BotTelegramCore, cls).__new__(cls, *args, **kwargs)
+                raise TypeError(
+                    'Cannot initilize instance from BotTelegramCore'
+                )
+            BotTelegramCore._instance = super(
+                BotTelegramCore, cls
+            ).__new__(cls, *args, **kwargs)
         return cls._instance
 
     def __init__(self):
@@ -37,12 +41,16 @@ class BotTelegramCore(ABC):
 
     @abstractmethod
     def config_handlers(self):
-        raise NotImplementedError('Cannot call config_handler from BotTelegramCore')
+        raise NotImplementedError(
+            'Cannot call config_handler from BotTelegramCore'
+        )
 
     @property
     @abstractmethod
     def chat_id(self):
-        raise NotImplementedError('Cannot call chat_id from BotTelegramCore')
+        raise NotImplementedError(
+            'Cannot call chat_id from BotTelegramCore'
+        )
 
     @property
     def chat(self):
@@ -50,7 +58,8 @@ class BotTelegramCore(ABC):
 
     @property
     def administrators(self):
-        return [chat_member.user.id for chat_member in self.chat.get_administrators()]
+        return [chat_member.user.id for
+                chat_member in self.chat.get_administrators()]
 
     @classmethod
     def is_admin(cls, user_id):
