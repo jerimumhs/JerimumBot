@@ -12,6 +12,17 @@ run:
 test:
 	pytest
 
+coverage:
+	pytest --cov=commands
+	pytest --cov=core --cov-append
+	pytest --cov=db --cov-append
+	pytest --cov=bot --cov-append
+	coverage report
+	coverage xml
+
+coverage.codacy: coverage
+	python-codacy-coverage -r coverage.xml -t $$CODACY_PROJECT_TOKEN
+
 flake8:
 	flake8
 

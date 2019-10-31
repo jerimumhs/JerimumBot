@@ -25,9 +25,16 @@ jobs:
       - base-command
       - run: make test
 
+  coverage:
+    executor: python-executor
+      steps:
+        - base-command
+        - run: make coverage.codacy
+
 workflows:
   version: 2.1
   tests:
     jobs:
       - flake8
       - test
+      - coverage
