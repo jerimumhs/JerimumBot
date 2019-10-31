@@ -8,6 +8,7 @@ from telegram.ext import CommandHandler
 
 from core import BotTelegramCore, throttle
 
+
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO)
