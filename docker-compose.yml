@@ -6,6 +6,7 @@ volumes:
 services:
     mongo:
         image: mongo
+        container_name: mongo
         env_file: .env
         ports:
             - "27017:27017"
@@ -16,6 +17,7 @@ services:
         build:
             context: .
             dockerfile: Dockerfile
+        container_name: bot
         command: python run.py
         depends_on:
             - mongo

@@ -43,7 +43,7 @@ docker.flake8:
 	docker-compose run bot flake8
 
 docker.bot.stop:
-	docker stop $(current_dir)_bot_1
+	docker stop bot
 
 docker.bot.restart: docker.bot.stop docker.up
 
