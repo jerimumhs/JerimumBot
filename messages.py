@@ -59,6 +59,14 @@ START = (
     "Para começar, basta digitar!"
 )
 
+I_DONT_KNOW = (
+    "Infelizmente não sei te responder 😕"
+)
+
+UNAUTHORIZED = (
+    "Apenas administradores tem permissão para utilizar esse comando 😅"
+)
+
 ERROR_INITIATE = (
     "Por favor, inicie uma conversa comigo para que eu possa te enviar uma mensagem!"
 )

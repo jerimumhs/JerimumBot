@@ -1,0 +1,24 @@
+version: '3'
+
+volumes:
+    mongo_volume:
+
+services:
+    mongo:
+        image: mongo
+        env_file: .env
+        ports:
+            - "27017:27017"
+        volumes:
+            - mongo_volume:/data/db
+
+    bot:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        command: python run.py
+        depends_on:
+            - mongo
+        volumes:
+            - .:/app
+        env_file: .env

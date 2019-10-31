@@ -19,117 +19,161 @@ comunidade do [Jerimum Hackerspace](http://jerimumhs.org/).
 
 Seguindo este rápido guia (desenvolvido para Linux), ao fim você será capaz de executar sua própria instância do nosso bot.
 
+<details><summary>Guia de instalação</summary>
+
+### Clonando o repositório
+
+<details><summary>Utilizando Git</summary>
+
+Para instalar o bot, o primeiro passo é clonar o repositório no seu ambiente local. Isso pode ser
+feito através do seguinte comando, via terminal:
+
+
+    git clone https://github.com/jerimumhs/JerimumBot.git
+
+Com isso pronto, basta entrar no diretório recém criado:
+
+    cd JerimumBot/
+
+</details>  
+
+### Configurando o ambiente
 <details>
 
-  ### Clonando o repositório
+Para rodar nosso bot é necessário `Python` e `Mongo`. Pode ser utilizado o docker para facilitar a utilizar ou realizar a instalação dessas tecnologias,
 
-  <details>
+#### instalação Python + Mongo
+<details><summary>Python</summary>
 
-   Para instalar o bot, o primeiro passo é clonar o repositório no seu ambiente local. Isso pode ser
-   feito através do seguinte comando, via terminal:
+É necessário ter algum python a cima da versão 3.6 siga a [documentação oficial](https://www.python.org/downloads/) para instalar.
 
-   ~~~~
-   git clone https://github.com/jerimumhs/JerimumBot.git
-   ~~~~
+##### Criando um ambiente virtual
+Antes de prosseguir na execução do bot, você precisará criar um ambiente virtual. Existem maneiras diferentes de fazer isso.
 
-   Com isso pronto, basta entrar no diretório recém criado:
+<details><summary>utilizando venv</summary>
 
-   ~~~~
-   cd JerimumBot/
-   ~~~~
-  </details>  
+Utilizando Python3.6, basta executar:
 
-  ### Criando um ambiente virtual
+    python3 -m venv {{nome_do_seu_venv}}
 
-  <details>
+Onde `{{nome_do_seu_venv}}` deve ser substituído por um nome de sua escolha.
 
-  Antes de prosseguir na execução do bot, você precisará criar um ambiente virtual. Existem maneiras diferentes de fazer isso, porém, nesse tutorial, mostraremos apenas uma.
+Agora, será necessário ativar este ambiente execute o comando referente ao seu SO:
 
-  Utilizando Python3.6, basta executar:
 
-  ~~~~
-  python3 -m venv {{nome_do_seu_venv}}
-  ~~~~
+<details> <summary>Linux</summary>
 
-  Onde `{{nome_do_seu_venv}}` deve ser substituído por um nome de sua escolha.
+    source {{nome_do_seu_venv}}/bin/activate
+</details>
 
-  Agora, será necessário ativar este ambiente:
 
-  ~~~~
-  source {{nome_do_seu_venv}}/bin/activate
-  ~~~~
+<details> <summary>Windows</summary>
 
-  Para mais informações sobre o assunto, basta ler a [documentação oficial](https://docs.python.org/3/library/venv.html).
+    {{nome_do_seu_venv}}/bin/activate.bat
+</details>
 
-  </details>
+Para mais informações sobre o assunto, basta ler a [documentação oficial](https://docs.python.org/3/library/venv.html).
 
-  ### Instalando dependências do projeto
+</details>
 
-  <details>
+##### Instalando dependências
+Instale as dependências de desenvolvimento do python
+  
+<details><summary>Linux Debian Based</summary>
 
-  Instale estes pacotes:
+Instale estes pacotes:
 
-  ~~~~
-  sudo apt install build-essential python3-dev libssl-dev libffi-dev \
-                   libxml2-dev libxslt1-dev zlib1g-dev
-  ~~~~
+~~~~
+sudo apt install build-essential python3-dev libssl-dev libffi-dev \
+               libxml2-dev libxslt1-dev zlib1g-dev
+~~~~
+</details>
+Depois disso, dentro do repositório clonado, basta executar:
 
-  Depois disso, dentro do repositório clonado, basta executar:
+    pip install -r requirements-dev.txt
 
-  ~~~~
-  pip install -r requirements.txt
-  ~~~~
+</details>
 
-  </details>
+<details><summary>Mongo</summary>
+Siga a [documentação oficial](https://docs.mongodb.com/manual/installation/)
+</details>
 
-  ### Criando seu próprio bot no Telegram
+#### instalação Docker
+<details><summary>Docker</summary>
 
-  <details>
+Para rodar nosso bot no docker é nessecário ter o `docker-ce` e `docker-compose`. Siga as documentações oficiais para instalar o [docker-ce](https://docs.docker.com/install/) e o [docker-compose](https://docs.docker.com/compose/install/)
 
-  Você precisará criar o seu próprio bot no Telegram para testar/desenvolver o JerimumBot. É um processo bastante rápido e simples.
-  Inicialmente, acesse a página do [BotFather](https://telegram.me/BotFather) e clique em `Send Message`.
+Para construir a imagem da aplicação rode o comando
 
-  A partir daí, o Telegram tentará abrir o aplicativo dele na sua máquina. Caso você não o tenha instalado, pode abrir o Telegram Web (ou até mesmo a versão mobile) e pesquisar por `BotFather`. Ao localizá-lo, inicie a conversa com um `/start` e siga as instruções para criar um novo bot. Ao fim, copie o token gerado, que será necessário na próxima seção.
+    make docker.build
 
-  </details>
+</details>
 
-  ### Configurando o .env no seu repositório local
+</details>
 
-  <details>
+### Criando seu próprio bot no Telegram
 
-  Você já está quase lá! Agora é necessário configurar a sua versão local do `.env`. Já existe um arquivo chamado `.env.example` na raiz do diretório. Copie o conteúdo dele para um novo arquivo chamando `.env`.
+<details>
 
-  Na primeira linha do arquivo você encontrará
+Você precisará criar o seu próprio bot no Telegram para testar/desenvolver o JerimumBot. É um processo bastante rápido e simples.
+Inicialmente, acesse a página do [BotFather](https://telegram.me/BotFather) e clique em `Send Message`.
 
-  ~~~~
-  export BOT_TOKEN=meu_token_123
-  ~~~~
+A partir daí, o Telegram tentará abrir o aplicativo dele na sua máquina. Caso você não o tenha instalado, pode abrir o Telegram Web (ou até mesmo a versão mobile) e pesquisar por `BotFather`. Ao localizá-lo, inicie a conversa com um `/start` e siga as instruções para criar um novo bot. Ao fim, copie o token gerado, que será necessário na próxima seção.
 
-  Substitua `meu_token_123` pelo token que foi gerado quando você criou o seu bot, no passo anterior.
+</details>
 
-  Por último, você precisará carregar as variáveis de ambiente do arquivo `.env` no seu terminal:
+### Configurando o .env no seu repositório local
+<details>
 
-  ~~~~
-  source .env
-  ~~~~
+Você já está quase lá! Agora é necessário configurar a sua versão local do `.env`. Já existe um arquivo chamado `.env.example` na raiz do diretório. Copie o conteúdo dele para um novo arquivo chamando `.env`.
 
-  </details>
+Na primeira linha do arquivo você encontrará
 
-  ### Executando o JerimumBot
+    BOT_TOKEN=meu_token_123
 
-  <details>
+Substitua `meu_token_123` pelo token que foi gerado quando você criou o seu bot, no passo anterior.
 
-  Depois de ter seguido todos os passos desse tutorial até aqui, você está com tudo pronto para executar o JerimumBot. Basta executar o comando `make run` e... pronto!
+Nas linhas 9 à 13 você encontrará linha do arquivo você encontrará
 
-  </details>
+    DB_USER=mongo
+    DB_PASSWORD=mongo
+    DB_HOST=mongo
+    DB_NAME=mongo
+    DB_PORT=27017
+    DB_AUTH=admin
 
-  ### Testando a sua instância
+Substitua os valores de acordo com a configuração de seu mongo nos passo anterior.
 
-  <details>
+Por último, você precisará carregar as variáveis de ambiente do arquivo `.env` no seu terminal:
+<details><summary>Linux</summary>
 
-  Depois disso, você pode testar as funcionalidades do JerimumBot no chat do próprio bot que você criou anteriormente. Todos os     comandos do JerimumBot estarão disponíveis para você, além dos novos que você possa ter desenvolvido.
+    source .env
+</details>
+</details>
 
-  </details>
+### Executando o JerimumBot
+
+<details><summary>Python + Mongo</summary>
+
+> Confirme que o seu mongo está rodando corretamente antes de executar o bot!
+
+Depois de ter seguido todos os passos desse tutorial até aqui, você está com tudo pronto para executar o JerimumBot. Basta executar o comando `make run` e... pronto!
+
+</details>
+
+<details><summary>Docker</summary>
+
+Depois de ter seguido todos os passos desse tutorial até aqui, você está com tudo pronto para executar o JerimumBot. Basta executar o comando `make docker.up` e... pronto!
+
+</details>
+
+### Testando a sua instância
+
+<details>
+
+Depois disso, você pode testar as funcionalidades do JerimumBot no chat do próprio bot que você criou anteriormente. Todos os     comandos do JerimumBot estarão disponíveis para você, além dos novos que você possa ter desenvolvido.
+
+</details>
 
 </details>
 
