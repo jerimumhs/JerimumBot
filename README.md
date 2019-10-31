@@ -2,6 +2,7 @@
 
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/ffc21d39c9a64dff90367a81738c8993)](https://www.codacy.com/manual/rodrigondec/JerimumBot?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=jerimumhs/JerimumBot&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://api.codacy.com/project/badge/Coverage/ffc21d39c9a64dff90367a81738c8993)](https://www.codacy.com/manual/rodrigondec/JerimumBot?utm_source=github.com&utm_medium=referral&utm_content=jerimumhs/JerimumBot&utm_campaign=Badge_Coverage)
 [![CircleCI](https://img.shields.io/circleci/build/github/jerimumhs/JerimumBot)](https://circleci.com/gh/jerimumhs/JerimumBot)
 ![GitHub](https://img.shields.io/github/license/jerimumhs/jerimumbot)
 ![GitHub language count](https://img.shields.io/github/languages/count/jerimumhs/jerimumbot)
