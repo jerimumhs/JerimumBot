@@ -27,9 +27,9 @@ jobs:
 
   coverage:
     executor: python-executor
-      steps:
-        - base-command
-        - run: make coverage.codacy
+    steps:
+      - base-command
+      - run: make coverage.codacy
 
 workflows:
   version: 2.1
