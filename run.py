@@ -6,11 +6,7 @@ from bot import JerimumBot
 
 
 if __name__ == '__main__':
-    instance = JerimumBot(
-        token=config('BOT_TOKEN', default='??'),
-        port=config('PORT', default=8443, cast=int),
-        server_url=config('SERVER_URL', default='??')
-    )
+    instance = JerimumBot.instance()
 
     try:
         mode = config('MODE', default='cmd')

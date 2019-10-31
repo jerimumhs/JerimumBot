@@ -23,4 +23,5 @@ def error(bot, update, err):
 
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando error handler do bot...')
-    instance.updater.dispatcher.add_error_handler(error)
+
+    instance.add_error_handler(error)

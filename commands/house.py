@@ -50,11 +50,11 @@ def status(bot, update):
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando comandos de casa do bot...')
 
-    instance.updater.dispatcher.add_handler(
+    instance.add_handler(
         CommandHandler("aberta", aberta))
 
-    instance.updater.dispatcher.add_handler(
+    instance.add_handler(
         CommandHandler("fechada", fechada))
 
-    instance.updater.dispatcher.add_handler(
+    instance.add_handler(
         CommandHandler("status", status))
