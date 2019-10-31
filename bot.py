@@ -36,10 +36,6 @@ class JerimumBot(BotTelegramCore):
     def send_message(cls, text, chat_id=None, parse_mode=None):
         super().send_message(text, chat_id or cls._chat_id, parse_mode)
 
-    @classmethod
-    def run(cls):
-        super(cls, cls.instance()).run()
-
 
 if __name__ == '__main__':
-    JerimumBot.run()
+    JerimumBot.instance().run()
