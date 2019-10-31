@@ -64,13 +64,11 @@ class BotTelegramCore(ABC):
     @classmethod
     def is_admin(cls, user_id):
         instance = cls.instance()
-        assert isinstance(instance, BotTelegramCore)
         return user_id in instance.administrators
 
     @classmethod
     def send_message(cls, text, chat_id, parse_mode=None):
         instance = cls.instance()
-        assert isinstance(instance, BotTelegramCore)
         instance._updater.bot.send_message(
             chat_id=chat_id,
             text=text,

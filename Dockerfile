@@ -8,4 +8,4 @@ RUN pip install -r requirements-dev.txt
 
 WORKDIR /app
 
-ADD . /app/
+COPY . /app/
