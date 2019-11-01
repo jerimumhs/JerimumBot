@@ -17,13 +17,7 @@ class BotTelegramCore(ABC):
 
     def __new__(cls, *args, **kwargs):
         if not cls._instance:
-            if cls == BotTelegramCore:
-                raise TypeError(
-                    'Cannot initilize instance from BotTelegramCore'
-                )
-            BotTelegramCore._instance = super(
-                BotTelegramCore, cls
-            ).__new__(cls, *args, **kwargs)
+            BotTelegramCore._instance = super().__new__(cls)
         return cls._instance
 
     def __init__(self):
