@@ -8,6 +8,7 @@ from telegram.ext import CommandHandler
 
 from core import BotTelegramCore, throttle
 
+
 logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     level=logging.INFO)
@@ -57,5 +58,5 @@ def coach(bot, update, args):
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando comandos de coach quantico do bot...')
 
-    instance.updater.dispatcher.add_handler(
+    instance.add_handler(
         CommandHandler("coach", coach, pass_args=True))

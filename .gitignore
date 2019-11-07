@@ -8,3 +8,7 @@ __pycache__
 venv/
 env/
 .idea/
+
+coverage.xml
+
+.coverage

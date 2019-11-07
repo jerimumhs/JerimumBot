@@ -2,7 +2,7 @@ import logging
 
 from telegram.ext import CommandHandler
 
-from core import BotTelegramCore, adm_verify
+from core import BotTelegramCore
 from messages import START, HELP, DESCRIPTION, RULES_COMPLETE
 
 
@@ -15,35 +15,35 @@ logger = logging.getLogger(__name__)
 
 def description(bot, update):
     """Send a message with the group description."""
-    if adm_verify(update):
+    user_id = update.message.from_user.id
+    if BotTelegramCore.is_admin(user_id):
         update.message.reply_text(DESCRIPTION)
     else:
         bot.sendMessage(
-            chat_id=update.message.from_user.id,
+            chat_id=user_id,
             text=DESCRIPTION)
 
 
 def rules(bot, update):
     """Send a message with the group rules."""
-    if adm_verify(update):
+    user_id = update.message.from_user.id
+    if BotTelegramCore.is_admin(user_id):
         update.message.reply_text(RULES_COMPLETE)
     else:
         bot.sendMessage(
-            chat_id=update.message.from_user.id,
+            chat_id=user_id,
             text=RULES_COMPLETE)
 
 
 def config_handlers(instance: BotTelegramCore):
     logging.info('Configurando comandos base do bot...')
-    dp = instance.updater.dispatcher
+    instance.add_handler(CommandHandler("regras", rules))
+    instance.add_handler(CommandHandler("descricao", description))
 
-    dp.add_handler(CommandHandler("regras", rules))
-    dp.add_handler(CommandHandler("descricao", description))
-
-    dp.add_handler(
+    instance.add_handler(
         CommandHandler("start",
                        lambda bot, update: update.message.reply_text(START)))
 
-    dp.add_handler(
+    instance.add_handler(
         CommandHandler("ajuda",
                        lambda bot, update: update.message.reply_text(HELP)))
