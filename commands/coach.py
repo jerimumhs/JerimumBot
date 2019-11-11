@@ -7,6 +7,8 @@ import requests
 from telegram.ext import CommandHandler
 
 from core import BotTelegramCore
+from db import CommandCall
+from messages import COMMAND_THROTTLED
 
 
 logging.basicConfig(
@@ -20,6 +22,17 @@ QTY_POSTS_PER_PAGE = 20
 
 
 def coach(bot, update, args):
+    user = update.message.from_user
+    bot_instance = BotTelegramCore.instance()
+
+    if bot_instance.is_from_oficial_chat(update):
+        if not CommandCall.allow_call(command=CommandCall.COACH):
+            last_call = CommandCall.last_coach()
+            bot.sendMessage(
+                chat_id=user.id,
+                text=COMMAND_THROTTLED.format(segundos=last_call.cooldown_left, comando=last_call.value))
+            return
+
     url_base = 'https://www.pensador.com'
 
     if len(args) == 0:
@@ -52,6 +65,9 @@ def coach(bot, update, args):
 
     update.message.reply_text(
         frases[random.randint(0, len(frases) - 1)].get_text())
+
+    if bot_instance.is_from_oficial_chat(update):
+        CommandCall.coach(user.username)
 
 
 def config_handlers(instance: BotTelegramCore):
