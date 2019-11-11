@@ -6,7 +6,8 @@ from bot import JerimumBot
 
 class CoachTest(TestCase):
 
-    def setUp(self):
+    @mock.patch('core.telegram.Updater')
+    def setUp(self, mocked_updater):
         JerimumBot.instance()
 
     @mock.patch('commands.coach.random.randint')
