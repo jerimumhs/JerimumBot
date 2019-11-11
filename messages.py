@@ -74,3 +74,7 @@ ERROR_INITIATE = (
 ERROR_BLOCKED = (
     "Você me bloqueou?! Tsc tsc. Que feio!!!🙄"
 )
+
+COMMAND_THROTTLED = (
+    "Ainda faltam {segundos} segundos para o comando {comando} ser liberado no grupo do JerimumHS 🙈"
+)
