@@ -6,7 +6,7 @@ from pyowm.exceptions.api_call_error import APICallError
 from decouple import config
 from telegram.ext import CommandHandler
 
-from core import BotTelegramCore, throttle
+from core import BotTelegramCore
 
 
 logging.basicConfig(format='%(asctime)s - %(name)s - '
@@ -16,7 +16,6 @@ logging.basicConfig(format='%(asctime)s - %(name)s - '
 logger = logging.getLogger(__name__)
 
 
-@throttle()
 def weather(bot, update, args):
     """Define weather at certain location"""
     api_key = config('OPENWEATHERMAP_TOKEN')
