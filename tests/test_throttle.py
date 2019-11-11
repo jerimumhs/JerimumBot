@@ -80,7 +80,8 @@ class CommandCallTest(TestCase):
     def test_is_cooldown_over_true_2(self):
         c = CommandCall(user='123',
                         _value=CommandCall.COACH,
-                        _datetime=pendulum.now().subtract(seconds=CommandCall.COOLDOWN)).save()
+                        _datetime=pendulum.now().subtract(
+                            seconds=CommandCall.COOLDOWN)).save()
         self.assertTrue(c.is_cooldown_over())
 
     def test_is_cooldown_over_false(self):

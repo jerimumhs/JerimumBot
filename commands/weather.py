@@ -29,7 +29,9 @@ def weather(bot, update, args):
             last_call = CommandCall.last_clima()
             bot.sendMessage(
                 chat_id=user.id,
-                text=COMMAND_THROTTLED.format(segundos=last_call.cooldown_left, comando=last_call.value))
+                text=COMMAND_THROTTLED.format(
+                    segundos=last_call.cooldown_left,
+                    comando=last_call.value))
             return
 
     api_key = config('OPENWEATHERMAP_TOKEN')

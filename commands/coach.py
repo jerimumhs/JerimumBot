@@ -30,7 +30,9 @@ def coach(bot, update, args):
             last_call = CommandCall.last_coach()
             bot.sendMessage(
                 chat_id=user.id,
-                text=COMMAND_THROTTLED.format(segundos=last_call.cooldown_left, comando=last_call.value))
+                text=COMMAND_THROTTLED.format(
+                    segundos=last_call.cooldown_left,
+                    comando=last_call.value))
             return
 
     url_base = 'https://www.pensador.com'
