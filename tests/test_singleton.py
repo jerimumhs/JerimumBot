@@ -5,6 +5,9 @@ from bot import JerimumBot
 
 
 class SingletonTest(TestCase):
+    def setUp(self):
+        BotTelegramCore._instance = None
+
     @mock.patch('core.telegram.Updater')
     def test_same_jerimum(self, mocked_updater):
         i1 = JerimumBot.instance()

@@ -1,5 +1,5 @@
 import pendulum
-from mongoengine import Document, DateTimeField, StringField, IntField
+from mongoengine import Document, DateTimeField, StringField
 
 
 class Status(Document):
@@ -16,7 +16,7 @@ class Status(Document):
         }
     }
 
-    user = IntField(required=True)
+    user = StringField(required=True)
     _datetime = DateTimeField(default=pendulum.now)
     _value = StringField(max_length=1, choices=CHOICES.keys(), required=True)
 
@@ -63,10 +63,8 @@ class Status(Document):
 
     @classmethod
     def aberta(cls, user):
-        instance = cls.create(user=user, value=cls.ABERTA)
-        return instance
+        return cls.create(user=user, value=cls.ABERTA)
 
     @classmethod
     def fechada(cls, user):
-        instance = cls.create(user=user, value=cls.FECHADA)
-        return instance
+        return cls.create(user=user, value=cls.FECHADA)
