@@ -1,13 +1,14 @@
 from unittest import TestCase, mock
 
 from commands.coach import coach
-from core.throttling import ThrottleDecorator
+from bot import JerimumBot
 
 
 class CoachTest(TestCase):
 
-    def tearDown(self):
-        ThrottleDecorator._last_run = 0
+    @mock.patch('core.telegram.Updater')
+    def setUp(self, mocked_updater):
+        JerimumBot.instance()
 
     @mock.patch('commands.coach.random.randint')
     @mock.patch('commands.coach.requests.get')
