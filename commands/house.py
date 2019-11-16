@@ -16,9 +16,9 @@ logger = logging.getLogger(__name__)
 
 def aberta(bot, update):
     """Set the status of our home as open and send referring sticker."""
-    user_id = update.message.from_user.id
-    if BotTelegramCore.is_admin(user_id):
-        _status = Status.aberta(user_id)
+    user = update.message.from_user
+    if BotTelegramCore.is_admin(user.id):
+        _status = Status.aberta(user.username)
         bot.send_sticker(
             sticker=_status.sticker,
             chat_id=BotTelegramCore.instance().chat_id)
@@ -28,9 +28,9 @@ def aberta(bot, update):
 
 def fechada(bot, update):
     """Set the status of our home as closed and send referring sticker."""
-    user_id = update.message.from_user.id
-    if BotTelegramCore.is_admin(user_id):
-        _status = Status.fechada(user_id)
+    user = update.message.from_user
+    if BotTelegramCore.is_admin(user.id):
+        _status = Status.fechada(user.username)
         bot.send_sticker(
             sticker=_status.sticker,
             chat_id=BotTelegramCore.instance().chat_id)
