@@ -44,7 +44,7 @@ def status(bot, update):
     if _status is not None:
         bot.send_sticker(
             sticker=Status.now().sticker,
-            chat_id=BotTelegramCore.instance().chat_id)
+            chat_id=update.message.chat_id)
     else:
         update.message.reply_text(I_DONT_KNOW)
 
