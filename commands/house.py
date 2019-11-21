@@ -41,10 +41,11 @@ def fechada(bot, update):
 def status(bot, update):
     """Send a sticker or message with the status of our home."""
     _status = Status.now()
+    user = update.message.from_user
     if _status is not None:
         bot.send_sticker(
             sticker=Status.now().sticker,
-            chat_id=update.message.chat_id)
+            chat_id=user.id)
     else:
         update.message.reply_text(I_DONT_KNOW)
 
